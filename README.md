@@ -1,5 +1,6 @@
 # Bachelor Project
 
+Using Unity 2021.3.16f1 and MRTK 2.7.3
 This file will detail the different commits
 
 ## hololens (master)
@@ -15,6 +16,8 @@ Having an end condition.
 Having it place itself in the right area in space (automatic or calibration).
 The objects and imprints dispositions are randomized or at least partly.
 ### details
+- v1.0 : first and second condition are done. Note : No sound yet
+- v1.1 : changed the structure of the project. Note : Gravity is not earth-like, Objects shouldn't bounce of the tray, The Collections need to have a script still.
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
