@@ -8,11 +8,14 @@ public class ObjectScript : MonoBehaviour
 {
 
     public GameObject Imprint;
+    public bool placed;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        placed = true;
+        this.GetComponent<NearInteractionGrabbable>().enabled = placed;
+        this.GetComponent<ObjectManipulator>().enabled = placed;
     }
 
     // Update is called once per frame
@@ -26,8 +29,10 @@ public class ObjectScript : MonoBehaviour
         if(collision.transform.tag == "Imprint")
         { if(collision.transform.name == Imprint.name)
             {
-                this.GetComponent<NearInteractionGrabbable>().enabled = false;
-                this.GetComponent<ObjectManipulator>().enabled = false;
+                placed = false;
+                this.GetComponent<NearInteractionGrabbable>().enabled = placed;
+                this.GetComponent<ObjectManipulator>().enabled = placed;
+                GameObject.Find("Parameters").GetComponent<ParametersScript>().CheckEnd();
                 print("Correct Imprint");
             } else
             {
