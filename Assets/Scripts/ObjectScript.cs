@@ -13,9 +13,9 @@ public class ObjectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // should be false when validate button works correctly
         placed = true;
-        this.GetComponent<NearInteractionGrabbable>().enabled = placed;
-        this.GetComponent<ObjectManipulator>().enabled = placed;
+        Interactable();
     }
 
     // Update is called once per frame
@@ -30,8 +30,7 @@ public class ObjectScript : MonoBehaviour
         { if(collision.transform.name == Imprint.name)
             {
                 placed = false;
-                this.GetComponent<NearInteractionGrabbable>().enabled = placed;
-                this.GetComponent<ObjectManipulator>().enabled = placed;
+                Interactable();
                 GameObject.Find("Parameters").GetComponent<ParametersScript>().CheckEnd();
                 print("Correct Imprint");
             } else
@@ -40,5 +39,10 @@ public class ObjectScript : MonoBehaviour
                 print("Wrong Imprint");
             }
         }
+    }
+
+    public void Interactable(){
+        this.GetComponent<NearInteractionGrabbable>().enabled = placed;
+        this.GetComponent<ObjectManipulator>().enabled = placed;
     }
 }
