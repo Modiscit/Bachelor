@@ -29,6 +29,7 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.2 : added a Script for parameters. fourth condition is done, there is a print message. Objects don't bounce of the tray no more. Note : There should be a pop up where you can start again or exit.
 - v1.3 : added models for objects 1 to 3 and corresponding imprints. Note : collider is less precise, house object missing one face.
 - v1.4 : same as hololens
+- v1.5 : added 4th model, adapted colors, fixed window in world, changed validate action, fixed objects after put down at the right place. Note : couldn't test some features as I can't move the objects anymore. Height buttons don't work anymore.
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
