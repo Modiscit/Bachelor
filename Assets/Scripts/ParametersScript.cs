@@ -16,13 +16,18 @@ public class ParametersScript : MonoBehaviour
         
     }
 
+    // works with current hierarchy
+    // checks all grandchildren of parameters to see if they can be interacted with
+    // if they all can't call ApplyEnd()
     public void CheckEnd(){
         bool end = true;
         foreach (Transform child in transform){
-            if (child.tag == "Object"){
-                if (!child.GetComponent<ObjectScript>().placed){
-                    end = false;
-                    break;
+            foreach (Transform greatchild in child){
+                if (greatchild.tag == "Object"){
+                    if (greatchild.GetComponent<ObjectScript>().can_interact){
+                        end = false;
+                        break;
+                    }
                 }
             }
         }

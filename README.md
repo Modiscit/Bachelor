@@ -7,13 +7,10 @@ This file will detail the different commits
 This branch is the main branch and holds the latest code that has been tested on the hololens 2 headset (except the first commit)
 ### details
 v1.4 : added window to choose height, deleted spatial awareness, changed scale and position of objects. Can build.
+v1.6 : buttons work correctly and are in the right area, slate is lower, profiled is disabled, checkend and validate method work, objects are stopped after being placed correctly (previous angular velocity issue), house model has all faces, poke and grab only
 #### issues
-- menu is far and down dynamically.
-- validation of height doesn't work.
-- profiler is visible
-- collisions are inaccurate (check mesh and box colliders)
-- hard to grab
-- objects fly away after being put down (even when not very dynamic, lock object in place)
+- collisions are inaccurate (check multiple primitive colliders)
+- can't make buttons work in unity, they work on the hololens
 
 ## prototype 1
 This branch is up to the first prototype, the base prototype, it consists of the following points.
@@ -30,6 +27,7 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.3 : added models for objects 1 to 3 and corresponding imprints. Note : collider is less precise, house object missing one face.
 - v1.4 : same as hololens
 - v1.5 : added 4th model, adapted colors, fixed window in world, changed validate action, fixed objects after put down at the right place. Note : couldn't test some features as I can't move the objects anymore. Height buttons don't work anymore.
+- v1.5 : same as hololens
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.

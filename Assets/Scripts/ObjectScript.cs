@@ -8,13 +8,13 @@ public class ObjectScript : MonoBehaviour
 {
 
     public GameObject Imprint;
-    public bool placed;
+    public bool can_interact;
 
     // Start is called before the first frame update
     void Start()
     {
-        // should be false when validate button works correctly
-        placed = true;
+        // should be false when I can interact with button in Unity, false for Hololens
+        can_interact = true;
         Interactable();
     }
 
@@ -27,15 +27,16 @@ public class ObjectScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // checks if the collision is with an imprint
-        if(collision.transform.tag == "Imprint")
+        if(can_interact && collision.transform.tag == "Imprint")
         {   // hits the right imprint
             if(collision.transform.name == Imprint.name)
             {
                 // stops interaction
-                placed = false;
+                can_interact = false;
                 Interactable();
                 // stops movement
-                this.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 // checks if all objects have been placed
                 GameObject.Find("Parameters").GetComponent<ParametersScript>().CheckEnd();
                     // to delete at the end
@@ -51,7 +52,8 @@ public class ObjectScript : MonoBehaviour
 
 // Interactable establishes interaction with the object based on the bool placed
     public void Interactable(){
-        this.GetComponent<NearInteractionGrabbable>().enabled = placed;
-        this.GetComponent<ObjectManipulator>().enabled = placed;
+        this.GetComponent<NearInteractionGrabbable>().enabled = can_interact;
+        this.GetComponent<ObjectManipulator>().enabled = can_interact;
     }
+
 }
