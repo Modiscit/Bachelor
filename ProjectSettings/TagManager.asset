@@ -7,6 +7,8 @@ TagManager:
   - Object
   - Imprint
   - Parameters
+  - Slate
+  - Collection
   layers:
   - Default
   - TransparentFX

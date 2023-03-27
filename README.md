@@ -27,7 +27,8 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.3 : added models for objects 1 to 3 and corresponding imprints. Note : collider is less precise, house object missing one face.
 - v1.4 : same as hololens
 - v1.5 : added 4th model, adapted colors, fixed window in world, changed validate action, fixed objects after put down at the right place. Note : couldn't test some features as I can't move the objects anymore. Height buttons don't work anymore.
-- v1.5 : same as hololens
+- v1.6 : same as hololens
+- v1.7 : added automatic layout of imprints and objects with randomization of order based on hierarchy
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
