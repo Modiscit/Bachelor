@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "anonimity": false,
+  "objects": [
+    {"name": "Square", "number": 1},
+    {"name": "Circle", "number": 1},
+    {"name": "House", "number": 1},
+    {"name": "Apple", "number": 1}
+  ],
+  "scale": 0.8,
+  "colors": [
+    "Blue",
+    "Green",
+    "Orange",
+    "Red",
+    "Yellow"
+  ],
+  "colormode": "normal",
+  "PRL": false,
+  "PRL_color": "Blue",
+  "PRL_size": 0.05,
+  "PRL_angle": 35,
+  "PRL_distance": 0.1
+}

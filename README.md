@@ -29,13 +29,15 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.5 : added 4th model, adapted colors, fixed window in world, changed validate action, fixed objects after put down at the right place. Note : couldn't test some features as I can't move the objects anymore. Height buttons don't work anymore.
 - v1.6 : same as hololens
 - v1.7 : added automatic layout of imprints and objects with randomization of order based on hierarchy
+- v2.1 : same as prototype 2
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
 Having a window where parameters can be changed.
-The parameters are the scale of the whole, the contrast, black and white or colors, PLF, the numbers of objects.
+The parameters are the scale of the whole, the contrast, black and white or white and black or colors, PLF, the numbers of objects, the name, the anonimity, the objects, the colors.
 Having the PLF (color, distance, size, orientation).
 ### details
+- v2.1 : parameters are read correctly from a JSON file.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
