@@ -40,6 +40,7 @@ Having the PLF (color, distance, size, orientation).
 ### details
 - v2.1 : parameters are read correctly from a JSON file.
 - v2.2 : tested on hololens.
+- v2.3 : added translation from JSON to Unity, currently doing apply. Note : if the JSON is not correct, or if the objects are not present, doesn't work
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
@@ -54,3 +55,4 @@ Having the capacity to save to a file
 If time allows these things will be added :
 A way to save custom parameters (especially PLF).
 An anonymous log-in
+Safeguards when things are not present in Unity from the JSON file
