@@ -8,8 +8,9 @@ This branch is the main branch and holds the latest code that has been tested on
 ### details
 v1.4 : added window to choose height, deleted spatial awareness, changed scale and position of objects. Can build.
 v1.6 : buttons work correctly and are in the right area, slate is lower, profiled is disabled, checkend and validate method work, objects are stopped after being placed correctly (previous angular velocity issue), house model has all faces, poke and grab only
+v2.2 : same as v2.1 but tested on hololens.
 #### issues
-- collisions are inaccurate (check multiple primitive colliders)
+- collisions are inaccurate (check multiple primitive colliders). Especially Y.
 - can't make buttons work in unity, they work on the hololens
 
 ## prototype 1
@@ -38,6 +39,7 @@ The parameters are the scale of the whole, the contrast, black and white or whit
 Having the PLF (color, distance, size, orientation).
 ### details
 - v2.1 : parameters are read correctly from a JSON file.
+- v2.2 : tested on hololens.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
