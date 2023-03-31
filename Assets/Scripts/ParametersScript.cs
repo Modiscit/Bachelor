@@ -100,7 +100,7 @@ public class ParametersScript : MonoBehaviour
 
     // set colodMode to one of three values, default is "normal"
     public void setColorMode(string mode="normal"){
-        if (mode == "blackandwhite" || mode == "whiteandblack"){
+        if (mode == "blackonwhite" || mode == "whiteonblack"){
             this.colorMode = mode;
         } else {
             this.colorMode = "normal";
@@ -128,17 +128,66 @@ public class ParametersScript : MonoBehaviour
     public void ApplyUnityParameters(){
         applyScale(this.scale);
         //applyObjects(this.objectsList, this.objectsNumberList);
-        //applyColors(this.colorsList, this.colorMode);
+        applyColors(this.colorsList, this.colorMode);
         //applyPRL(this.PRL,this.PRL_angle, this.PRL_distance, this.PRL_radius, this.PRL_color);
+        applyLays();
     }
 
     // this method is private because it would change the size of the PRL otherwise
     private void applyScale(float number){
-        // get y position of slate in space
-        // maybe get distance y imprints to slate
+        // get position relative to the HeightCalibrationMenu
+        Vector3 previousPos = this.transform.position;
+        GameObject HeightCalibrationMenu = GameObject.Find("HeightCalibrationMenu");
+        Vector3 MenuEverythingDifference = HeightCalibrationMenu.transform.position - previousPos;
+        print("position y of everything is : " + previousPos);
+        // get slate and an imprint
+        GameObject Slate = GameObject.Find("Slate");
+        GameObject Imprint = GameObject.FindGameObjectWithTag("Imprint");
+        // get distance y imprints to slate
+        float tempGapY = Imprint.transform.position.y - Slate.transform.position.y;
+        // change the scale of everything in regards to the actual scale
         this.transform.localScale = number * this.transform.localScale;
-        // maybe reset the distance y imprints to slate to what it was, check if necessary with min and max scale
-        // set y position of slate in space to where it was
+        // reset the distance y, imprints to slate, to what it was based on the difference
+        float gapYDifference =  Imprint.transform.position.y - Slate.transform.position.y - tempGapY;
+        Vector3 actualSlatePosition = Slate.transform.position;
+        actualSlatePosition.y += gapYDifference;
+        Slate.transform.position = actualSlatePosition;
+        // reset position of everything in space to HeightCalibrationMenu, to what it was based on the scaled difference
+        this.transform.position = HeightCalibrationMenu.transform.position - new Vector3 (number*MenuEverythingDifference.x,MenuEverythingDifference.y,number*MenuEverythingDifference.z);
+    }
+
+    // can't be called twice as the imprints and the objects pairs don't have the same indices after intialization
+    // in case this methods is called multiple times, uncomment the changing of the slate color
+    private void applyColors(List<Material> materials, string coloring){
+        GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
+        GameObject ImprintsCollection = GameObject.Find("ImprintsCollection");
+        int numberOfChildren = ImprintsCollection.transform.childCount;
+        int currentImprintNumber = 0;
+        // just to have a color in case coloring is neither of the three values
+        Material color = materials[0];
+        if (coloring.Equals("blackonwhite")){
+            color = (Material)Resources.Load("Black", typeof(Material));
+            //GameObject.Find("Slate").GetComponent<MeshRenderer>().material = (Material)Resources.Load("WhiteSlate", typeof(Material));
+        } else if (coloring.Equals("whiteonblack")){
+            color = (Material)Resources.Load("White", typeof(Material));
+            GameObject.Find("Slate").GetComponent<MeshRenderer>().material = (Material)Resources.Load("BlackSlate", typeof(Material));
+        } //else {
+            //GameObject.Find("Slate").GetComponent<MeshRenderer>().material = (Material)Resources.Load("WhiteSlate", typeof(Material));
+        //}
+        foreach (Transform objectChild in ObjectsCollection.transform){
+            if (coloring.Equals("normal")){
+                color = materials[Random.Range(0, materials.Count)];
+            }
+            objectChild.GetComponent<MeshRenderer>().material = color;
+            ImprintsCollection.transform.GetChild(currentImprintNumber++).GetComponent<MeshRenderer>().material = color;
+        }
+
+    }
+
+    private void applyLays(){
+        Transform slate = GameObject.FindGameObjectWithTag("Slate").transform;
+        GameObject.Find("ObjectsCollection").GetComponent<ObjectsCollectionScript>().Lay(slate);
+        GameObject.Find("ImprintsCollection").GetComponent<ImprintsCollectionScript>().Lay(slate);
     }
 
     // works with current hierarchy

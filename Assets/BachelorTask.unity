@@ -876,6 +876,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: cf245589001040f43a4b6f693b34f660, type: 3}
+  userName: 
+  anonimity: 0
+  objectsList: []
+  objectsNumberList: 
+  scale: 0
+  colorsList: []
+  colorMode: 
+  PRL: 0
+  PRL_angle: 0
+  PRL_distance: 0
+  PRL_radius: 0
+  PRL_color: {fileID: 0}
 --- !u!114 &693722437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4045,7 +4057,7 @@ GameObject:
   - component: {fileID: 69439547931968195}
   - component: {fileID: 978408735599318075}
   m_Layer: 0
-  m_Name: NearMenu3x1
+  m_Name: HeightCalibrationMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

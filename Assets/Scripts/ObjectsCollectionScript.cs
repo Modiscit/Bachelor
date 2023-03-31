@@ -7,7 +7,6 @@ public class ObjectsCollectionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Lay(GameObject.FindGameObjectWithTag("Slate").transform);
     }
 
     // Update is called once per frame
@@ -17,7 +16,7 @@ public class ObjectsCollectionScript : MonoBehaviour
     }
 
     // Lay objects next to a plane in a grid, bottom to top, right to left, 4 by 3.
-    void Lay(Transform planeTransform){
+    public void Lay(Transform planeTransform){
         // Grid parameters, max Per Row is the number of times you can lay the biggest object on the plane completely
         // They are however arbitrary
         int maxPerColumn = 4;

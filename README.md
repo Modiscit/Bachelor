@@ -41,6 +41,7 @@ Having the PLF (color, distance, size, orientation).
 - v2.1 : parameters are read correctly from a JSON file.
 - v2.2 : tested on hololens.
 - v2.3 : added translation from JSON to Unity, currently doing apply. Note : if the JSON is not correct, or if the objects are not present, doesn't work
+- v2.4 : added colors, scale, lay application. Note : check size and position of objects, potential issue of imprints' appearance in lower scale.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
