@@ -2,12 +2,12 @@
   "name": "test",
   "anonimity": false,
   "objects": [
-    {"name": "Square", "number": 1},
-    {"name": "Circle", "number": 1},
+    {"name": "Square", "number": 0},
+    {"name": "Circle", "number": 3},
     {"name": "House", "number": 1},
     {"name": "Apple", "number": 1}
   ],
-  "scale": 0.1,
+  "scale": 1,
   "colors": [
     "Blue",
     "Green",

@@ -35,6 +35,7 @@ public class ObjectsCollectionScript : MonoBehaviour
         float spaceZ = (planeDepth - (maxPerColumn-1)*biggestDepth)/(maxPerColumn-1);
         // Shuffle the Children objects
         int numOfChildren = this.transform.childCount;
+        print("there is " + numOfChildren + " children for the objectsCollection");
         ShuffleChildren(numOfChildren);
         // Calculate the centers
         List<float> listCenterX = new List<float>();
@@ -48,6 +49,7 @@ public class ObjectsCollectionScript : MonoBehaviour
         int tempRow = 0;
         int tempColumn = 0;
         foreach (Transform child in transform){
+            print(child.name);
             Vector3 newPosition = child.position;
             // the center is not necessarily the origin in Unity
             float biasX = child.position.x - child.GetComponent<Renderer>().bounds.center.x;

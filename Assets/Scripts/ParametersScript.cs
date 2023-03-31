@@ -127,7 +127,7 @@ public class ParametersScript : MonoBehaviour
     // All apply
     public void ApplyUnityParameters(){
         applyScale(this.scale);
-        //applyObjects(this.objectsList, this.objectsNumberList);
+        applyObjects(this.objectsList, this.objectsNumberList);
         applyColors(this.colorsList, this.colorMode);
         //applyPRL(this.PRL,this.PRL_angle, this.PRL_distance, this.PRL_radius, this.PRL_color);
         applyLays();
@@ -154,6 +154,35 @@ public class ParametersScript : MonoBehaviour
         Slate.transform.position = actualSlatePosition;
         // reset position of everything in space to HeightCalibrationMenu, to what it was based on the scaled difference
         this.transform.position = HeightCalibrationMenu.transform.position - new Vector3 (number*MenuEverythingDifference.x,MenuEverythingDifference.y,number*MenuEverythingDifference.z);
+    }
+
+    // for this method to work, the imprints need to have the same name as the objects + Imprint.
+    // can be called only once if there was a 0 in the list.
+    private void applyObjects(List<Transform> piecesList, List<int> piecesNumbersList){
+        GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
+        GameObject ImprintsCollection = GameObject.Find("ImprintsCollection");
+        int tempIndex = 0;
+        foreach (int number in piecesNumbersList){
+            GameObject piece = piecesList[tempIndex++].gameObject;
+            GameObject pieceImprint = GameObject.Find(piece.name + "Imprint");
+            if (number < 1){
+                // necessary else the parent still counts as having that child, even though it is dead
+                piece.transform.parent = null;
+                pieceImprint.transform.parent = null;
+                Destroy(piece);
+                Destroy(pieceImprint);
+            } else if (number > 1){
+                for (int i = 1; i < number; i++){
+                    GameObject pieceClone = Instantiate(piece, piece.transform.position, piece.transform.rotation);
+                    GameObject pieceImprintClone = Instantiate(pieceImprint, pieceImprint.transform.position, pieceImprint.transform.rotation);
+                    pieceClone.transform.parent = piece.transform.parent;
+                    pieceImprintClone.transform.parent = pieceImprint.transform.parent;
+                    pieceClone.transform.localScale = piece.transform.localScale;
+                    pieceImprintClone.transform.localScale = pieceImprint.transform.localScale;
+                }
+            }
+        }
+        print("the objecCollection has " + ObjectsCollection.transform.childCount + " children from the parameters");
     }
 
     // can't be called twice as the imprints and the objects pairs don't have the same indices after intialization

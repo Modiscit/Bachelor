@@ -8,6 +8,7 @@ public class Parameters
     // whether or not the recorded data should be anonymous or not
     public bool anonimity;
     // a collection of object with names and integer, the names are those of the objects already in the program
+    // there shouldn't be more than 12 objects due to the layout
     public Object[] objects;
     // a scale that should be between 1 and 0.1
     public float scale;
