@@ -26,11 +26,23 @@ public class ObjectScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // checks if the collision is with an imprint
-        if(can_interact && collision.transform.tag == "Imprint")
-        {   // hits the right imprint
-            if(collision.transform.name == Imprint.name)
-            {
+        bool isOfColor = false;
+        bool isOfShape = false;
+        // checks if the collision was in movement mode and with an imprint
+        // TO ADD on release
+        if(can_interact && collision.transform.tag == "Imprint") {
+            // checks if it is with the same shape, checks the name of the model (defined in the 3D modeling tool)
+            if (collision.transform.GetComponent<MeshFilter>().mesh.name.Equals(this.transform.GetComponent<MeshFilter>().mesh.name)) {
+                print("it has the same shape");
+                isOfShape = true;
+            }
+            // checks if it is with the same color
+            if (collision.transform.GetComponent<MeshRenderer>().material.name == this.transform.GetComponent<MeshRenderer>().material.name){
+                print("it has the same color");
+                isOfColor = true;
+            }
+            // if it is with a correct imprint
+            if (isOfColor && isOfShape){
                 // stops interaction
                 can_interact = false;
                 Interactable();
@@ -41,11 +53,11 @@ public class ObjectScript : MonoBehaviour
                 GameObject.Find("Parameters").GetComponent<ParametersScript>().CheckEnd();
                     // to delete at the end
                 print("Correct Imprint");
-            // hits another imprint
+            // hits something else
             } else
             {
                     // to delete at the end
-                print("Wrong Imprint");
+                print("Error");
             }
         }
     }

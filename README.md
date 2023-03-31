@@ -34,8 +34,8 @@ The objects and imprints dispositions are randomized or at least partly.
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
-Having a window where parameters can be changed.
-The parameters are the scale of the whole, the contrast, black and white or white and black or colors, PLF, the numbers of objects, the name, the anonimity, the objects, the colors.
+Having a JSON file where parameters can be changed.
+The parameters are the scale of the whole, the contrast, black and white or white and black or colors, PLF, the numbers of objects, the name, the anonimity, the objects, the colors, the rotationmode and the scalingmode.
 Having the PLF (color, distance, size, orientation).
 ### details
 - v2.1 : parameters are read correctly from a JSON file.
@@ -43,6 +43,7 @@ Having the PLF (color, distance, size, orientation).
 - v2.3 : added translation from JSON to Unity, currently doing apply. Note : if the JSON is not correct, or if the objects are not present, doesn't work
 - v2.4 : added colors, scale, lay application. Note : check size and position of objects, potential issue of imprints' appearance in lower scale.
 - v2.5 : added numbers application. Note : collision check method has to change, the clone pieces interact only with the same imprint.
+- v2.6 : changed collision methods. Note : collision itself has still the same issues.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
