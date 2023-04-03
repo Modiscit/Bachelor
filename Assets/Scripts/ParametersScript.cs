@@ -129,7 +129,7 @@ public class ParametersScript : MonoBehaviour
         applyScale(this.scale);
         applyObjects(this.objectsList, this.objectsNumberList);
         applyColors(this.colorsList, this.colorMode);
-        //applyPRL(this.PRL,this.PRL_angle, this.PRL_distance, this.PRL_radius, this.PRL_color);
+        applyPRL(this.PRL,this.PRL_angle, this.PRL_distance, this.PRL_radius, this.PRL_color);
         applyLays();
     }
 
@@ -211,6 +211,20 @@ public class ParametersScript : MonoBehaviour
             ImprintsCollection.transform.GetChild(currentImprintNumber++).GetComponent<MeshRenderer>().material = color;
         }
 
+    }
+
+    // create PRL circles children of the pieces. PRL prefab has to be in a Resources folder and called PRL.
+    private void applyPRL(bool enabled, int angle, float distance, float radius, Material color){
+        if (enabled){
+            Transform objectsCollection = GameObject.Find("ObjectsCollection").transform;
+            GameObject PRLprefab = (GameObject)Resources.Load("PRL", typeof(GameObject));
+            // for each child object of objects collection, create the PRL prefab and assign the object as its parent
+            // call a function to set its values
+            foreach (Transform objectChild in objectsCollection){
+                GameObject PRL = Instantiate(PRLprefab, objectChild);
+                PRL.GetComponent<PRLScript>().setRadiusAndPositionFieldAndColor(angle,distance,radius,color);
+            }
+        }
     }
 
     private void applyLays(){

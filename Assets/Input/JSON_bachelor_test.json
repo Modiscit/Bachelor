@@ -16,7 +16,7 @@
     "Yellow"
   ],
   "colormode": "normal",
-  "PRL": false,
+  "PRL": true,
   "PRL_color": "Blue",
   "PRL_size": 0.05,
   "PRL_angle": 35,
