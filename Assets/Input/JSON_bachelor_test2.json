@@ -1,0 +1,26 @@
+{
+  "name": "test2",
+  "anonimity": true,
+  "objects": [
+    {"name": "Square", "number": 2},
+    {"name": "Circle", "number": 2},
+    {"name": "House", "number": 2},
+    {"name": "Apple", "number": 2}
+  ],
+  "scale": 1,
+  "scalemode": "normal",
+  "rotationmode": "xzlocked",
+  "colors": [
+    "Blue",
+    "Green",
+    "Orange",
+    "Red",
+    "Yellow"
+  ],
+  "colormode": "blackonwhite",
+  "PRL": false,
+  "PRL_color": "Blue",
+  "PRL_size": 0.05,
+  "PRL_angle": 35,
+  "PRL_distance": 0.1
+}

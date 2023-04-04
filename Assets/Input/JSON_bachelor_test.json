@@ -7,7 +7,9 @@
     {"name": "House", "number": 1},
     {"name": "Apple", "number": 1}
   ],
-  "scale": 1,
+  "scale": 0.4,
+  "scalemode": "normal",
+  "rotationmode": "free",
   "colors": [
     "Blue",
     "Green",

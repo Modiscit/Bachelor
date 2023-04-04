@@ -12,6 +12,10 @@ public class Parameters
     public Object[] objects;
     // a scale that should be between 1 and 0.1
     public float scale;
+    // a string that is either "normal" or "imprintsonly"
+    public string scalemode;
+    // a string that is either "free", "xzlocked" or "locked"
+    public string rotationmode;
     // a list of strings that correspond to names of materials
     public string[] colors;
     // a string that is either "normal", "blackandwhite" or "whiteandblack"

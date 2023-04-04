@@ -1,0 +1,26 @@
+{
+  "name": "test3",
+  "anonimity": false,
+  "objects": [
+    {"name": "Square", "number": 6},
+    {"name": "Circle", "number": 6},
+    {"name": "House", "number": 0},
+    {"name": "Apple", "number": 0}
+  ],
+  "scale": 0.5,
+  "scalemode": "imprintsonly",
+  "rotationmode": "locked",
+  "colors": [
+    "Blue",
+    "Green",
+    "Orange",
+    "Red",
+    "Yellow"
+  ],
+  "colormode": "whiteonblack",
+  "PRL": true,
+  "PRL_color": "Red",
+  "PRL_size": 0.1,
+  "PRL_angle": 270,
+  "PRL_distance": 0.05
+}

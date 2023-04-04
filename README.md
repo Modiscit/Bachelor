@@ -31,6 +31,7 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.6 : same as hololens
 - v1.7 : added automatic layout of imprints and objects with randomization of order based on hierarchy
 - v2.1 : same as prototype 2
+- v2.8 : same as prototype 2
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
@@ -45,6 +46,7 @@ Having the PRL (color, distance, size, orientation).
 - v2.5 : added numbers application. Note : collision check method has to change, the clone pieces interact only with the same imprint.
 - v2.6 : changed collision methods. Note : collision itself has still the same issues.
 - v2.7 : added PRL.
+- v2.8 : added Rotationmode and Scalemode. Note : Rotationmode "locked" has no effect in hololens, "xzlocked" has not been tested. Angle of PRL is off.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
@@ -60,3 +62,9 @@ If time allows these things will be added :
 A way to save custom parameters (especially PLF).
 An anonymous log-in
 Safeguards when things are not present in Unity from the JSON file
+
+## known issues
+Collisions register too high (y)
+Collisions for circles are very hard to register in hololens
+Rotationmode "locked" doesn't work, "xzlocked" may not work (to test)
+Angle of PRL seems wrong

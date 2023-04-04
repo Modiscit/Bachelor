@@ -1,3 +1,5 @@
+using Microsoft.MixedReality.Toolkit.Utilities;
+using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +14,8 @@ public class ParametersScript : MonoBehaviour
     public List<Transform> objectsList;
     public List<int> objectsNumberList;
     public float scale;
+    public string scalemode;
+    public string rotationmode;
     public List<Material> colorsList;
     public string colorMode;
     public bool PRL;
@@ -44,6 +48,8 @@ public class ParametersScript : MonoBehaviour
         setAnonimity(parametersObject.anonimity);
         setObjects(parametersObject.objects);
         setScale(parametersObject.scale);
+        setScaleMode(parametersObject.scalemode);
+        setRotationMode(parametersObject.rotationmode);
         setColors(parametersObject.colors);
         setColorMode(parametersObject.colormode);
         setPRL(parametersObject.PRL,parametersObject.PRL_angle,
@@ -83,6 +89,26 @@ public class ParametersScript : MonoBehaviour
         this.scale = Mathf.Max(Mathf.Min(maxScale,number),minScale);
     }
 
+    // set scalemode to either "normal" or "imprintsonly"
+    // default is "normal"
+    public void setScaleMode(string mode="normal"){
+        if (mode.Equals("imprintsonly")){
+            this.scalemode = mode;
+        } else {
+            this.scalemode = "normal";
+        }
+    }
+
+    // set rotationmode to either "free", "xzlocked" or "locked"
+    // default is "free"
+    public void setRotationMode(string mode="free"){
+        if (mode.Equals("xzlocked") || mode.Equals("locked")){
+            this.rotationmode = mode;
+        } else {
+            this.rotationmode = "free";
+        }
+    }
+
     // add to colorsList the materials in the folder Resources (compulsory name) corresponding to the names in the list
     // default is Blue
     public void setColors(string[] colorsNameList){
@@ -109,14 +135,13 @@ public class ParametersScript : MonoBehaviour
 
     // set values for PRL fields
     // angle is between 0 and 359
-    // radius is at most the same as the distance
     // the default material is Red
     // default is disabled
     public void setPRL(bool active=false, int angle=45, float distance=0.1f, float size=0.05f, string color="Red"){
         this.PRL = active;
         this.PRL_angle = angle % 360;
         this.PRL_distance = distance;
-        this.PRL_radius = size < distance ? size : distance;
+        this.PRL_radius = size;
         Material tempMaterial = (Material)Resources.Load(color, typeof(Material));
         if (tempMaterial == null){
             tempMaterial = (Material)Resources.Load("Red", typeof(Material));
@@ -126,7 +151,8 @@ public class ParametersScript : MonoBehaviour
 
     // All apply
     public void ApplyUnityParameters(){
-        applyScale(this.scale);
+        applyScale(this.scale, this.scalemode);
+        applyRotationMode(this.rotationmode);
         applyObjects(this.objectsList, this.objectsNumberList);
         applyColors(this.colorsList, this.colorMode);
         applyPRL(this.PRL,this.PRL_angle, this.PRL_distance, this.PRL_radius, this.PRL_color);
@@ -134,26 +160,60 @@ public class ParametersScript : MonoBehaviour
     }
 
     // this method is private because it would change the size of the PRL otherwise
-    private void applyScale(float number){
-        // get position relative to the HeightCalibrationMenu
-        Vector3 previousPos = this.transform.position;
-        GameObject HeightCalibrationMenu = GameObject.Find("HeightCalibrationMenu");
-        Vector3 MenuEverythingDifference = HeightCalibrationMenu.transform.position - previousPos;
-        print("position y of everything is : " + previousPos);
-        // get slate and an imprint
+    // default is no change in scale and everything scale normally
+    private void applyScale(float number=1f, string mode="normal"){
         GameObject Slate = GameObject.Find("Slate");
-        GameObject Imprint = GameObject.FindGameObjectWithTag("Imprint");
-        // get distance y imprints to slate
-        float tempGapY = Imprint.transform.position.y - Slate.transform.position.y;
-        // change the scale of everything in regards to the actual scale
-        this.transform.localScale = number * this.transform.localScale;
-        // reset the distance y, imprints to slate, to what it was based on the difference
-        float gapYDifference =  Imprint.transform.position.y - Slate.transform.position.y - tempGapY;
-        Vector3 actualSlatePosition = Slate.transform.position;
-        actualSlatePosition.y += gapYDifference;
-        Slate.transform.position = actualSlatePosition;
-        // reset position of everything in space to HeightCalibrationMenu, to what it was based on the scaled difference
-        this.transform.position = HeightCalibrationMenu.transform.position - new Vector3 (number*MenuEverythingDifference.x,MenuEverythingDifference.y,number*MenuEverythingDifference.z);
+        if (mode.Equals("imprintsonly")){
+            GameObject ImprintsCollections = GameObject.Find("ImprintsCollection");
+            foreach (Transform imprintChild in ImprintsCollections.transform){
+                float tempGapY = imprintChild.position.y - Slate.transform.position.y;
+                Vector3 newLocalScale = imprintChild.localScale;
+                newLocalScale.x *= number;
+                newLocalScale.z *= number;
+                imprintChild.localScale = newLocalScale;
+                Vector3 tempPosition = imprintChild.position;
+                tempPosition.y = Slate.transform.position.y + tempGapY;
+                imprintChild.position = tempPosition;
+            }
+        } else {
+            // get position relative to the HeightCalibrationMenu
+            Vector3 previousPos = this.transform.position;
+            GameObject HeightCalibrationMenu = GameObject.Find("HeightCalibrationMenu");
+            Vector3 MenuEverythingDifference = HeightCalibrationMenu.transform.position - previousPos;
+            print("position y of everything is : " + previousPos);
+            // get an imprint
+            GameObject Imprint = GameObject.FindGameObjectWithTag("Imprint");
+            // get distance y imprints to slate
+            float tempGapY = Imprint.transform.position.y - Slate.transform.position.y;
+            // change the scale of everything in regards to the actual scale
+            this.transform.localScale = number * this.transform.localScale;
+            // reset the distance y, imprints to slate, to what it was based on the difference
+            float gapYDifference =  Imprint.transform.position.y - Slate.transform.position.y - tempGapY;
+            Vector3 actualSlatePosition = Slate.transform.position;
+            actualSlatePosition.y += gapYDifference;
+            Slate.transform.position = actualSlatePosition;
+            // reset position of everything in space to HeightCalibrationMenu, to what it was based on the scaled difference
+            this.transform.position = HeightCalibrationMenu.transform.position - new Vector3 (number*MenuEverythingDifference.x,MenuEverythingDifference.y,number*MenuEverythingDifference.z);
+        }
+    }
+
+    // lock the rotation of the objects based on mode
+    // called only once, if multiple add a third else to unlock the rotation and check that nothing has been locked differently before
+    private void applyRotationMode(string mode){
+        // enable rotation only on the Y axis
+        if (mode.Equals("xzlocked")){
+            foreach (Transform childObject in this.objectsList){
+                var objectManip = childObject.gameObject.GetComponent<ObjectManipulator>();
+                RotationAxisConstraint xzRotationConstraint = new RotationAxisConstraint();
+                xzRotationConstraint.ConstraintOnRotation = AxisFlags.YAxis;
+                objectManip.ConstraintsManager.AddConstraintToManualSelection(xzRotationConstraint);
+            }
+        // disable all rotations
+        } else if (mode.Equals("locked")){
+            foreach (Transform childObject in this.objectsList){
+                childObject.GetComponent<Rigidbody>().freezeRotation = true;
+            }
+        }
     }
 
     // for this method to work, the imprints need to have the same name as the objects + Imprint.
