@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectsCollectionScript : MonoBehaviour
 {
+    // the object currently in interaction with
+    public GameObject isInteractingWith = null;
+
     // Start is called before the first frame update
     void Start()
     {

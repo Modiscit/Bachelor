@@ -24,7 +24,7 @@ public class ObjectScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+/*     private void OnCollisionEnter(Collision collision)
     {
         bool isOfColor = false;
         bool isOfShape = false;
@@ -59,6 +59,18 @@ public class ObjectScript : MonoBehaviour
                     // to delete at the end
                 print("Error");
             }
+        }
+    } */
+
+    // This becomes the object in use and if an object was being used, it can't be interacted with anymore.
+    public void OnGrab(){
+        GameObject wasInteracting = this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith;
+        if (wasInteracting == null){
+            this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith = this.gameObject;
+        } else {
+            wasInteracting.GetComponent<ObjectScript>().can_interact = false;
+            wasInteracting.GetComponent<ObjectScript>().Interactable();
+            this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith = this.gameObject;
         }
     }
 

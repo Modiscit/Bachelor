@@ -47,6 +47,7 @@ Having the PRL (color, distance, size, orientation).
 - v2.6 : changed collision methods. Note : collision itself has still the same issues.
 - v2.7 : added PRL.
 - v2.8 : added Rotationmode and Scalemode. Note : Rotationmode "locked" has no effect in hololens, "xzlocked" has not been tested. Angle of PRL is off.
+- v2.9 : added min size of PRL of 0.1, added height of PRL to be on top of object, fixed PRL angle, added one piece at a time, terminationmenu. Note : the menu doesn't do anything yet
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
@@ -67,4 +68,3 @@ Safeguards when things are not present in Unity from the JSON file
 Collisions register too high (y)
 Collisions for circles are very hard to register in hololens
 Rotationmode "locked" doesn't work, "xzlocked" may not work (to test)
-Angle of PRL seems wrong

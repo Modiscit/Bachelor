@@ -32,9 +32,9 @@ public class PRLScript : MonoBehaviour
     // Set the Vector3 position difference field of the PRL indicator
     // with z and x position dependent on the angle (0 being z positive) and the distance, y being as is
     private void setPositionField(int angle, float distance){
-        this.differencePosition = new Vector3(Mathf.Sin(angle * Mathf.Rad2Deg)*distance, 
+        this.differencePosition = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad)*distance, 
         0, 
-        Mathf.Cos(angle * Mathf.Rad2Deg)*distance);
+        Mathf.Cos(angle * Mathf.Deg2Rad)*distance);
     }
 
     // set the color of the PRL indicator to the color given
@@ -53,7 +53,7 @@ public class PRLScript : MonoBehaviour
 
     // set the position to be a difference to its parent center position
     private void setPosition(Vector3 difference){
-        Vector3 parentPosition = this.transform.parent.GetComponent<Renderer>().bounds.center;
-        this.transform.position = parentPosition + this.differencePosition;
+        Bounds parentBounds= this.transform.parent.GetComponent<Renderer>().bounds;
+        this.transform.position = parentBounds.center + new Vector3 (0,parentBounds.extents.y,0) + this.differencePosition;
     }
 }

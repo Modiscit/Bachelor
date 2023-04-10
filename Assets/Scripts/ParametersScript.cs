@@ -136,12 +136,13 @@ public class ParametersScript : MonoBehaviour
     // set values for PRL fields
     // angle is between 0 and 359
     // the default material is Red
+    // size can't be smaller than 0.1
     // default is disabled
     public void setPRL(bool active=false, int angle=45, float distance=0.1f, float size=0.05f, string color="Red"){
         this.PRL = active;
         this.PRL_angle = angle % 360;
         this.PRL_distance = distance;
-        this.PRL_radius = size;
+        this.PRL_radius = size < 0.1f ? 0.1f : size;
         Material tempMaterial = (Material)Resources.Load(color, typeof(Material));
         if (tempMaterial == null){
             tempMaterial = (Material)Resources.Load("Red", typeof(Material));
