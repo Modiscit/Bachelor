@@ -36,7 +36,7 @@ The objects and imprints dispositions are randomized or at least partly.
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
 Having a JSON file where parameters can be changed.
-The parameters are the scale of the whole, the contrast, black and white or white and black or colors, PLF, the numbers of objects, the name, the anonimity, the objects, the colors, the rotationmode and the scalingmode.
+The parameters are the scale of the whole, the contrast, black and white or white and black or colors, PLF, the numbers of objects, the name, the anonimity, the objects, the colors, the rotationmode, the scalingmode, the limit_to_field_of_view.
 Having the PRL (color, distance, size, orientation).
 ### details
 - v2.1 : parameters are read correctly from a JSON file.
@@ -48,15 +48,17 @@ Having the PRL (color, distance, size, orientation).
 - v2.7 : added PRL.
 - v2.8 : added Rotationmode and Scalemode. Note : Rotationmode "locked" has no effect in hololens, "xzlocked" has not been tested. Angle of PRL is off.
 - v2.9 : added min size of PRL of 0.1, added height of PRL to be on top of object, fixed PRL angle, added one piece at a time, terminationmenu. Note : the menu doesn't do anything yet
+- v2.10 : added a boolean to limit scale to field of view, fixed objects could be interacted with only once, TerminationMenu buttons should work, added JSON objects for data recording.
 
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
 Having parameters used for the task
 Having number of errors
-Having time recorded of pick ups individual and global and which hands
-Having the percentage and global direction of the errors (up/down, left/right)
-Having the capacity to save to a file
+Having time recorded of pick ups individual and global
+Having the direction of the errors of each piece (vector)
+Having the capacity to save to a JSON file
 ### details
+- v2.10 : same as prototype 2
 
 ## extras
 If time allows these things will be added :
@@ -68,3 +70,8 @@ Safeguards when things are not present in Unity from the JSON file
 Collisions register too high (y)
 Collisions for circles are very hard to register in hololens
 Rotationmode "locked" doesn't work, "xzlocked" may not work (to test)
+
+## to test
+TerminationMenu Buttons
+RotationLock
+Find FieldOfView Length

@@ -14,6 +14,8 @@ public class Parameters
     public float scale;
     // a string that is either "normal" or "imprintsonly"
     public string scalemode;
+    // a bool that limit the scale to an empirical value
+    public bool limit_to_field_of_view;
     // a string that is either "free", "xzlocked" or "locked"
     public string rotationmode;
     // a list of strings that correspond to names of materials

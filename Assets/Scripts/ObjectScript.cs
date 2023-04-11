@@ -67,9 +67,8 @@ public class ObjectScript : MonoBehaviour
         GameObject wasInteracting = this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith;
         if (wasInteracting == null){
             this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith = this.gameObject;
-        } else {
-            wasInteracting.GetComponent<ObjectScript>().can_interact = false;
-            wasInteracting.GetComponent<ObjectScript>().Interactable();
+        } else if (wasInteracting != this.gameObject){
+            wasInteracting.GetComponent<ObjectScript>().Terminate();
             this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith = this.gameObject;
         }
     }
@@ -78,6 +77,11 @@ public class ObjectScript : MonoBehaviour
     public void Interactable(){
         this.GetComponent<NearInteractionGrabbable>().enabled = can_interact;
         this.GetComponent<ObjectManipulator>().enabled = can_interact;
+    }
+
+    public void Terminate(){
+        can_interact = false;
+        Interactable();
     }
 
 }

@@ -9,6 +9,7 @@
   ],
   "scale": 0.4,
   "scalemode": "normal",
+  "limit_to_field_of_view": true,
   "rotationmode": "free",
   "colors": [
     "Blue",

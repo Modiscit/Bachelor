@@ -9,6 +9,7 @@
   ],
   "scale": 0.5,
   "scalemode": "imprintsonly",
+  "limit_to_field_of_view": false,
   "rotationmode": "locked",
   "colors": [
     "Blue",

@@ -337,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 693722437}
+      objectReference: {fileID: 1559333770}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -365,11 +365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Lower
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ChangeYPositionScript, Assembly-CSharp
+      value: TerminationMenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1036,6 +1036,7 @@ Transform:
   m_Children:
   - {fileID: 1639544303}
   - {fileID: 671313939}
+  - {fileID: 1559333769}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1051,13 +1052,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead38aad4ca3cfa448ed08bc04438cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: defca48d9ae3dfb49a2c7f09779a1725, type: 3}
+  jsonFile: {fileID: 4900000, guid: cf245589001040f43a4b6f693b34f660, type: 3}
   userName: 
   anonimity: 0
   objectsList: []
   objectsNumberList: 
   scale: 0
   scalemode: 
+  limit_to_field_of_view: 0
   rotationmode: 
   colorsList: []
   colorMode: 
@@ -1480,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -1489,18 +1491,18 @@ PrefabInstance:
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 693722437}
+      objectReference: {fileID: 1559333770}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Higher
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ChangeYPositionScript, Assembly-CSharp
+      value: TerminationMenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1708,7 +1710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: TouchEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -1720,7 +1722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
@@ -1745,11 +1747,11 @@ PrefabInstance:
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1559333768}
+      objectReference: {fileID: 1559333770}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1046141743}
+      objectReference: {fileID: 1559333768}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -1776,11 +1778,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_UpdateSolvers
+      value: Terminate
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: SetActive
+      value: set_UpdateSolvers
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
@@ -1792,11 +1794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler, Microsoft.MixedReality.Toolkit.SDK
+      value: TerminationMenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler, Microsoft.MixedReality.Toolkit.SDK
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
@@ -1808,11 +1810,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2070291447063185073, guid: 3f1f46cbecbe08e46a303ccfdb5b498a, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
@@ -2575,6 +2577,7 @@ GameObject:
   - component: {fileID: 1559333767}
   - component: {fileID: 1559333766}
   - component: {fileID: 1559333765}
+  - component: {fileID: 1559333770}
   m_Layer: 0
   m_Name: TerminationMenu
   m_TagString: Untagged
@@ -2755,17 +2758,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559333764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1657, y: -0.2594, z: 0.096}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.41425002, y: -0.29700005, z: 1.49}
+  m_LocalScale: {x: 2.5, y: 5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1304367078}
   - {fileID: 1381960259}
   - {fileID: 2084387621}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 693722435}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1559333770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559333764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e0f1d35b451cd438a00a94be5910c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639544302
 GameObject:
   m_ObjectHideFlags: 0

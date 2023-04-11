@@ -3,6 +3,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class ParametersScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ParametersScript : MonoBehaviour
     public List<int> objectsNumberList;
     public float scale;
     public string scalemode;
+    public bool limit_to_field_of_view;
     public string rotationmode;
     public List<Material> colorsList;
     public string colorMode;
@@ -47,7 +49,7 @@ public class ParametersScript : MonoBehaviour
         setName(parametersObject.name);
         setAnonimity(parametersObject.anonimity);
         setObjects(parametersObject.objects);
-        setScale(parametersObject.scale);
+        setScale(parametersObject.scale, parametersObject.limit_to_field_of_view);
         setScaleMode(parametersObject.scalemode);
         setRotationMode(parametersObject.rotationmode);
         setColors(parametersObject.colors);
@@ -83,10 +85,17 @@ public class ParametersScript : MonoBehaviour
     }
 
     // set scale to the number in between bounds, default is 1
-    public void setScale(float number=1f){
+    // can also be bounded by the field of view
+    public void setScale(float number=1f, bool limit=true){
         float minScale = 0.1f;
         float maxScale = 1f;
-        this.scale = Mathf.Max(Mathf.Min(maxScale,number),minScale);
+        // TOCHECK empircally, find the value that max the field of view
+        float maxFieldOfView = 0.8f;
+        if (limit){
+            this.scale = Mathf.Min(maxFieldOfView,number);
+        } else {
+            this.scale = Mathf.Max(Mathf.Min(maxScale,number),minScale);
+        }
     }
 
     // set scalemode to either "normal" or "imprintsonly"
@@ -297,7 +306,7 @@ public class ParametersScript : MonoBehaviour
     // works with current hierarchy
     // checks all grandchildren of parameters to see if they can be interacted with
     // if they all can't call ApplyEnd()
-    public void CheckEnd(){
+    /* public void CheckEnd(){
         bool end = true;
         foreach (Transform child in transform){
             foreach (Transform greatchild in child){
@@ -316,5 +325,32 @@ public class ParametersScript : MonoBehaviour
 
     void ApplyEnd(){
         print("You've successfully placed all objects");
+    } */
+
+    public void Terminate(){
+        GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
+        foreach (Transform ObjectChild in ObjectsCollection.transform){
+            ObjectChild.GetComponent<ObjectScript>().Terminate();
+        }
+        Record();
+    }
+
+    public void Record(){
+        Records Recordfile = new Records();
+        // Serialize the object into JSON and save string.
+        string jsonString = JsonUtility.ToJson(Recordfile);
+        // find a path to store the file, name the file depending on anonimity
+        string saveFile = Application.persistentDataPath + "/" + getName() + ".json";
+        // Write JSON to file.
+        File.WriteAllText(saveFile, jsonString);
+    }
+
+    // TODO
+    // should return 23_04_11_15_26_name/hash
+    public string getName(){
+        if (anonimity){
+            // return hash
+        }
+        return name;
     }
 }

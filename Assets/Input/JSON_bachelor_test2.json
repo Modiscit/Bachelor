@@ -9,6 +9,7 @@
   ],
   "scale": 1,
   "scalemode": "normal",
+  "limit_to_field_of_view": false,
   "rotationmode": "xzlocked",
   "colors": [
     "Blue",
