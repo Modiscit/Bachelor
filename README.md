@@ -53,12 +53,14 @@ Having the PRL (color, distance, size, orientation).
 ## prototype 3
 This branch is up to the third prototype, the feedback prototype, it consists of the following points.
 Having parameters used for the task
-Having number of errors
+Having number of errors, and number of color and shape error
 Having time recorded of pick ups individual and global
-Having the direction of the errors of each piece (vector)
+Having the difference in position of each piece (vector)
+Having the difference of rotation of each piece (vector)
 Having the capacity to save to a JSON file
 ### details
 - v2.10 : same as prototype 2
+- v3.1 : termination button produces a JSON file with records with all the necessary recordings (not tested)
 
 ## extras
 If time allows these things will be added :

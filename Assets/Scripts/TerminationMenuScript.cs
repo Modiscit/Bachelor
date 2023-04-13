@@ -17,6 +17,7 @@ public class TerminationMenuScript : MonoBehaviour
 
     public void Terminate(){
         GameObject Parameters = GameObject.Find("Parameters");
+        Parameters.GetComponent<ParametersScript>().end = Time.time;
         Parameters.GetComponent<ParametersScript>().Terminate();
     }
 }

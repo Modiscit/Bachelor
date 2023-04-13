@@ -25,6 +25,9 @@ public class ParametersScript : MonoBehaviour
     public float PRL_distance;
     public float PRL_radius;
     public Material PRL_color;
+    // the fields to record
+    public float start = 0f;
+    public float end = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -303,30 +306,6 @@ public class ParametersScript : MonoBehaviour
         GameObject.Find("ImprintsCollection").GetComponent<ImprintsCollectionScript>().Lay(slate);
     }
 
-    // works with current hierarchy
-    // checks all grandchildren of parameters to see if they can be interacted with
-    // if they all can't call ApplyEnd()
-    /* public void CheckEnd(){
-        bool end = true;
-        foreach (Transform child in transform){
-            foreach (Transform greatchild in child){
-                if (greatchild.tag == "Object"){
-                    if (greatchild.GetComponent<ObjectScript>().can_interact){
-                        end = false;
-                        break;
-                    }
-                }
-            }
-        }
-        if (end){
-            ApplyEnd();
-        }
-    }
-
-    void ApplyEnd(){
-        print("You've successfully placed all objects");
-    } */
-
     public void Terminate(){
         GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
         foreach (Transform ObjectChild in ObjectsCollection.transform){
@@ -337,6 +316,26 @@ public class ParametersScript : MonoBehaviour
 
     public void Record(){
         Records Recordfile = new Records();
+        // Get time between validation of height and validation of task
+        Recordfile.time_total = end - start;
+        // Getting each objects records
+        GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
+        Recordfile.objects = new ObjectRecords[ObjectsCollection.transform.childCount];
+        int tempIndex = 0;
+        foreach (Transform objectChild in ObjectsCollection.transform){
+            Recordfile.objects[tempIndex++] = objectChild.GetComponent<ObjectScript>().GetRecords();
+        }
+        Recordfile.scale = scale;
+        Recordfile.scalemode = scalemode;
+        Recordfile.limit_to_field_of_view = limit_to_field_of_view;
+        Recordfile.rotationmode = rotationmode;
+        Recordfile.colors = getNameOfColors(colorsList);
+        Recordfile.colormode = colorMode;
+        Recordfile.PRL = PRL;
+        Recordfile.PRL_color = PRL_color.name;
+        Recordfile.PRL_size = PRL_radius;
+        Recordfile.PRL_angle = PRL_angle;
+        Recordfile.PRL_distance = PRL_distance;
         // Serialize the object into JSON and save string.
         string jsonString = JsonUtility.ToJson(Recordfile);
         // find a path to store the file, name the file depending on anonimity
@@ -352,5 +351,14 @@ public class ParametersScript : MonoBehaviour
             // return hash
         }
         return name;
+    }
+
+    // returns an array of colors names from a list of materials
+    public string[] getNameOfColors(List<Material> colors){
+        string[] colorsName = new string[colors.Count];
+        for (int i = 0; i < colors.Count; i++){
+            colorsName[i] = colors[i].name;
+        }
+        return colorsName;
     }
 }
