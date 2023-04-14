@@ -1,5 +1,5 @@
 {
-  "name": "test3",
+  "user_name": "test3",
   "anonimity": false,
   "objects": [
     {"name": "Square", "number": 6},

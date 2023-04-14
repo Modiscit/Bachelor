@@ -61,6 +61,7 @@ Having the capacity to save to a JSON file
 ### details
 - v2.10 : same as prototype 2
 - v3.1 : termination button produces a JSON file with records with all the necessary recordings (not tested)
+- v3.2 : corrected the name of the file saved and multiple continuous collisions on the same object register as only one error now. Also changed the color of the white slate to be more pearly. Switch all shaders to MRTK standard from standard. Note: save files to C:\Users\berts\AppData\LocalLow\DefaultCompany\Bachelor
 
 ## extras
 If time allows these things will be added :
@@ -74,6 +75,8 @@ Collisions for circles are very hard to register in hololens
 Rotationmode "locked" doesn't work, "xzlocked" may not work (to test)
 
 ## to test
-TerminationMenu Buttons
+# On hololens
+TerminationMenu Quit Button
 RotationLock
 Find FieldOfView Length
+# in Unity

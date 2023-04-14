@@ -4,7 +4,7 @@ public class Parameters
 {
     // case sensitive variables matching the JSON file
     // the name of the user
-    public string name;
+    public string user_name;
     // whether or not the recorded data should be anonymous or not
     public bool anonimity;
     // a collection of object with names and integer, the names are those of the objects already in the program

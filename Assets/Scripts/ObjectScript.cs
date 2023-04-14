@@ -34,7 +34,7 @@ public class ObjectScript : MonoBehaviour
         bool isOfColor = false;
         bool isOfShape = false;
         // checks if the collision was in movement mode and with an imprint different from the last one
-        if(can_interact && collision.transform.tag == "Imprint" && collision.gameObject != last_collision_imprint) {
+        if(can_interact && collision.transform.tag == "Imprint" && !collision.gameObject.Equals(last_collision_imprint)) {
             // record the imprint it collided with
             last_collision_imprint = collision.gameObject;
             // checks if it is with the same shape, checks the name of the model (defined in the 3D modeling tool)

@@ -52,6 +52,7 @@ public class PRLScript : MonoBehaviour
     }
 
     // set the position to be a difference to its parent center position
+    //TODO potentially add the radius to the height, so the bottom of the prl dot touches the border at worst, else the middle of the dot could be visible
     private void setPosition(Vector3 difference){
         Bounds parentBounds= this.transform.parent.GetComponent<Renderer>().bounds;
         this.transform.position = parentBounds.center + new Vector3 (0,parentBounds.extents.y,0) + this.differencePosition;

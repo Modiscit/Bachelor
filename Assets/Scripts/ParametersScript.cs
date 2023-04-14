@@ -10,7 +10,7 @@ public class ParametersScript : MonoBehaviour
     // the JSON file loaded in Unity
     public TextAsset jsonFile;
     // the parameters from the JSON
-    public string userName;
+    public string user_name;
     public bool anonimity;
     public List<Transform> objectsList;
     public List<int> objectsNumberList;
@@ -44,12 +44,11 @@ public class ParametersScript : MonoBehaviour
 
     private Parameters readJson(TextAsset json){
         Parameters parametersInJson = JsonUtility.FromJson<Parameters>(json.text);
-        print(parametersInJson.objects[0].name);
         return parametersInJson;
     }
 
     private void ParametersToUnityParameters(Parameters parametersObject){
-        setName(parametersObject.name);
+        setName(parametersObject.user_name);
         setAnonimity(parametersObject.anonimity);
         setObjects(parametersObject.objects);
         setScale(parametersObject.scale, parametersObject.limit_to_field_of_view);
@@ -64,7 +63,8 @@ public class ParametersScript : MonoBehaviour
     // All setters
     // set the name of the user, default is "anonymous"
     public void setName(string text="anonymous"){
-        this.userName = name;
+        this.user_name = text;
+        print(this.user_name);
     }
 
     // set the anonimity, default is false
@@ -340,6 +340,7 @@ public class ParametersScript : MonoBehaviour
         string jsonString = JsonUtility.ToJson(Recordfile);
         // find a path to store the file, name the file depending on anonimity
         string saveFile = Application.persistentDataPath + "/" + getName() + ".json";
+        print("path where the JSON is : " + Application.persistentDataPath);
         // Write JSON to file.
         File.WriteAllText(saveFile, jsonString);
     }
@@ -350,7 +351,7 @@ public class ParametersScript : MonoBehaviour
         if (anonimity){
             // return hash
         }
-        return name;
+        return user_name;
     }
 
     // returns an array of colors names from a list of materials

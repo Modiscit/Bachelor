@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: cf245589001040f43a4b6f693b34f660, type: 3}
-  userName: 
+  user_name: 
   anonimity: 0
   objectsList: []
   objectsNumberList: 
