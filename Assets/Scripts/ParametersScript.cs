@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class ParametersScript : MonoBehaviour
 {
@@ -64,7 +65,6 @@ public class ParametersScript : MonoBehaviour
     // set the name of the user, default is "anonymous"
     public void setName(string text="anonymous"){
         this.user_name = text;
-        print(this.user_name);
     }
 
     // set the anonimity, default is false
@@ -278,7 +278,7 @@ public class ParametersScript : MonoBehaviour
         //}
         foreach (Transform objectChild in ObjectsCollection.transform){
             if (coloring.Equals("normal")){
-                color = materials[Random.Range(0, materials.Count)];
+                color = materials[UnityEngine.Random.Range(0, materials.Count)];
             }
             objectChild.GetComponent<MeshRenderer>().material = color;
             ImprintsCollection.transform.GetChild(currentImprintNumber++).GetComponent<MeshRenderer>().material = color;
@@ -345,13 +345,15 @@ public class ParametersScript : MonoBehaviour
         File.WriteAllText(saveFile, jsonString);
     }
 
-    // TODO
-    // should return 23_04_11_15_26_name/hash
+    // should return 23_04_11_15_26_name or hash
     public string getName(){
+        string date = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_");
+        string nameOfFile = date + user_name;
         if (anonimity){
             // return hash
+            return nameOfFile.GetHashCode().ToString();
         }
-        return user_name;
+        return nameOfFile;
     }
 
     // returns an array of colors names from a list of materials
