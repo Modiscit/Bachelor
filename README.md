@@ -62,6 +62,7 @@ Having the capacity to save to a JSON file
 - v2.10 : same as prototype 2
 - v3.1 : termination button produces a JSON file with records with all the necessary recordings (not tested)
 - v3.2 : corrected the name of the file saved and multiple continuous collisions on the same object register as only one error now. Also changed the color of the white slate to be more pearly. Switch all shaders to MRTK standard from standard. Note: save files to C:\Users\berts\AppData\LocalLow\DefaultCompany\Bachelor
+- v3.3 : added outline on hover and grab. Note: Meshes have to be read/write enabled for the outline to work, else crash. MeshOutline script has to be deactivated at the start and an hover color has to be referenced.
 
 ## extras
 If time allows these things will be added :

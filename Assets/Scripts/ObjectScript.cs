@@ -1,5 +1,6 @@
 using Microsoft.MixedReality.Toolkit.Input;
 using Microsoft.MixedReality.Toolkit.UI;
+using Microsoft.MixedReality.Toolkit.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,6 +70,7 @@ public class ObjectScript : MonoBehaviour
     }
 
     // This becomes the object in use and if an object was being used, it can't be interacted with anymore.
+    // It also changes the color of the outline to Grab Material
     public void OnGrab(){
         setFirstGrabbedTime();
         GameObject wasInteracting = this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith;
@@ -78,6 +80,24 @@ public class ObjectScript : MonoBehaviour
             wasInteracting.GetComponent<ObjectScript>().Terminate();
             this.transform.parent.GetComponent<ObjectsCollectionScript>().isInteractingWith = this.gameObject;
         }
+        setOutlineColor("Grab");
+    }
+
+    // Set the last released time and changed back the color to Hover Material
+    public void OnRelease(){
+        setLastReleasedTime();
+        setOutlineColor("Release");
+    }
+
+    // Activates the outline the object to hint that it can be grabbed
+    // The outline script shouldn't be activated right from the start, else there is an issue
+    public void OnHoverEnter(){
+        setOutlineColor("HoverEnter");
+    }
+
+    // Deactivate outline to hint that it can't be grabbed
+    public void OnHoverExit(){
+        setOutlineColor("HoverExit");
     }
 
 // Interactable establishes interaction with the object based on the bool placed
@@ -150,5 +170,27 @@ public class ObjectScript : MonoBehaviour
 
     public void setLastReleasedTime(){
         last_time = Time.time;
+    }
+
+    // activate, deactivate, change colors of the outline
+    // for some reasong any changes set the color back, so we reset it after the changes
+    // default is HoverExit, which disables the outline
+    public void setOutlineColor(string mode="HoverExit"){
+        Material color = this.GetComponent<MeshRenderer>().material;
+        switch (mode){
+            case "HoverEnter":
+                this.GetComponent<MeshOutline>().enabled = true;
+                break;
+            case "Grab":
+                this.GetComponent<MeshOutline>().OutlineMaterial = (Material)Resources.Load("GrabOutline", typeof(Material));
+                break;
+            case "Release":
+                this.GetComponent<MeshOutline>().OutlineMaterial = (Material)Resources.Load("HoverOutline", typeof(Material));
+                break;
+            default:
+                this.GetComponent<MeshOutline>().enabled = false;
+                break;
+        }
+        this.GetComponent<MeshRenderer>().material = color;
     }
 }
