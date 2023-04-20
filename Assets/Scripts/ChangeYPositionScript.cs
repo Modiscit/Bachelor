@@ -16,9 +16,8 @@ public class ChangeYPositionScript : MonoBehaviour
 
     // calls every grandchildren and if they have the tag object, they are interactable once more
     public void Validate(){
-        GameObject Parameters = GameObject.Find("Parameters");
-        Parameters.GetComponent<ParametersScript>().start = Time.time;
-        foreach (Transform child in transform){
+        this.GetComponent<ParametersScript>().start = Time.time;
+        foreach (Transform child in this.transform){
             foreach (Transform greatchild in child){
                 if (greatchild.tag == "Object"){
                     greatchild.GetComponent<ObjectScript>().can_interact = true;

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ObjectScript : MonoBehaviour
 {
-    public bool can_interact;
+    public bool can_interact = false;
     public int number_of_errors = 0;
     public int number_of_color_errors = 0;
     public int number_of_shape_errors = 0;
@@ -19,9 +19,9 @@ public class ObjectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // should be false when I can interact with button in Unity, false for Hololens
-        can_interact = true;
-        Interactable();
+        // // should be false when I can interact with button in Unity, false for Hololens
+        // can_interact = true;
+        // Interactable();
     }
 
     // Update is called once per frame
