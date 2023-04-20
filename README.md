@@ -6,9 +6,12 @@ This file will detail the different commits
 ## hololens (master)
 This branch is the main branch and holds the latest code that has been tested on the hololens 2 headset (except the first commit)
 ### details
-v1.4 : added window to choose height, deleted spatial awareness, changed scale and position of objects. Can build.
-v1.6 : buttons work correctly and are in the right area, slate is lower, profiled is disabled, checkend and validate method work, objects are stopped after being placed correctly (previous angular velocity issue), house model has all faces, poke and grab only
-v2.2 : same as v2.1 but tested on hololens.
+- v1.4 : added window to choose height, deleted spatial awareness, changed scale and position of objects. Can build.
+- v1.6 : buttons work correctly and are in the right area, slate is lower, profiled is disabled, checkend and validate method work, objects are stopped after being placed correctly (previous angular velocity issue), house model has all faces, poke and grab only
+- v2.2 : same as v2.1 but tested on hololens.
+- v2.8 : same as prototype 2
+- v3.6 : same as prototype 3
+
 #### issues
 - collisions are inaccurate (check multiple primitive colliders). Especially Y.
 - can't make buttons work in unity, they work on the hololens
@@ -31,7 +34,6 @@ The objects and imprints dispositions are randomized or at least partly.
 - v1.6 : same as hololens
 - v1.7 : added automatic layout of imprints and objects with randomization of order based on hierarchy
 - v2.1 : same as prototype 2
-- v2.8 : same as prototype 2
 
 ## prototype 2
 This branch is up to the second prototype, the customizable prototype, it consists of the following points.
@@ -65,6 +67,8 @@ Having the capacity to save to a JSON file
 - v3.3 : added outline on hover and grab. Note: Meshes have to be read/write enabled for the outline to work, else crash. MeshOutline script has to be deactivated at the start and an hover color has to be referenced.
 - v3.4 : added data naming and hashing.
 - v3.5 : fixed interaction can't be started until height is validated. Note : last test on hololens v2.8 (had issues but worked), now doesn't load correctly since at least v3.4.
+- v3.6 : fixed Hololens and README. Note: outline render queue is wrong, file doesn't seem to be saved on the hololens.
+
 ## extras
 If time allows these things will be added :
 A way to save custom parameters (especially PLF).
@@ -75,6 +79,9 @@ Safeguards when things are not present in Unity from the JSON file
 Collisions register too high (y)
 Collisions for circles are very hard to register in hololens
 Rotationmode "locked" doesn't work, "xzlocked" may not work (to test)
+
+## known fixes
+Had an issue where the app would work for a user, but not me on the hololens. Karim fixed it by repairing the application on the hololens.
 
 ## to test
 # On hololens
