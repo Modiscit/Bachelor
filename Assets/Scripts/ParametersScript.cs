@@ -93,7 +93,7 @@ public class ParametersScript : MonoBehaviour
         float minScale = 0.1f;
         float maxScale = 1f;
         // TOCHECK empircally, find the value that max the field of view
-        float maxFieldOfView = 0.8f;
+        float maxFieldOfView = 0.3f;
         if (limit){
             this.scale = Mathf.Min(maxFieldOfView,number);
         } else {
@@ -211,20 +211,24 @@ public class ParametersScript : MonoBehaviour
     }
 
     // lock the rotation of the objects based on mode
-    // called only once, if multiple add a third else to unlock the rotation and check that nothing has been locked differently before
+    // called only once, if multiple calls, add a third else to unlock the rotation and check that nothing has been locked differently before
     private void applyRotationMode(string mode){
         // enable rotation only on the Y axis
         if (mode.Equals("xzlocked")){
             foreach (Transform childObject in this.objectsList){
-                var objectManip = childObject.gameObject.GetComponent<ObjectManipulator>();
-                RotationAxisConstraint xzRotationConstraint = new RotationAxisConstraint();
-                xzRotationConstraint.ConstraintOnRotation = AxisFlags.YAxis;
-                objectManip.ConstraintsManager.AddConstraintToManualSelection(xzRotationConstraint);
+                //var objectManip = childObject.gameObject.GetComponent<ObjectManipulator>();
+                RotationAxisConstraint XAxisRotationContraint = childObject.gameObject.AddComponent<RotationAxisConstraint>();
+                RotationAxisConstraint ZAxisRotationContraint = childObject.gameObject.AddComponent<RotationAxisConstraint>();
+                XAxisRotationContraint.ConstraintOnRotation = AxisFlags.XAxis;
+                ZAxisRotationContraint.ConstraintOnRotation = AxisFlags.ZAxis;
+                //RotationAxisConstraint xzRotationConstraint = new RotationAxisConstraint();
+                //xzRotationConstraint.ConstraintOnRotation = AxisFlags.YAxis;
+                //objectManip.ConstraintsManager.AddConstraintToManualSelection(xzRotationConstraint);
             }
         // disable all rotations
         } else if (mode.Equals("locked")){
             foreach (Transform childObject in this.objectsList){
-                childObject.GetComponent<Rigidbody>().freezeRotation = true;
+                FixedRotationToWorldConstraint AxisRotationContraint = childObject.gameObject.AddComponent<FixedRotationToWorldConstraint>();
             }
         }
     }
