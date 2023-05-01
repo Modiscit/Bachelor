@@ -193,7 +193,9 @@ public class ParametersScript : MonoBehaviour
             Vector3 previousPos = this.transform.position;
             GameObject HeightCalibrationMenu = GameObject.Find("HeightCalibrationMenu");
             Vector3 MenuEverythingDifference = HeightCalibrationMenu.transform.position - previousPos;
-            print("position y of everything is : " + previousPos);
+            // get termination menu position relative to the slate end
+            GameObject TerminationMenu = GameObject.Find("TerminationMenu");
+            Vector3 TerminationSlateEndDifference = TerminationMenu.transform.position - (Slate.transform.position + new Vector3 (Slate.GetComponent<DimensionScript>().getGlobalLength()/2,0f,0f));
             // get an imprint
             GameObject Imprint = GameObject.FindGameObjectWithTag("Imprint");
             // get distance y imprints to slate
@@ -207,6 +209,10 @@ public class ParametersScript : MonoBehaviour
             Slate.transform.position = actualSlatePosition;
             // reset position of everything in space to HeightCalibrationMenu, to what it was based on the scaled difference
             this.transform.position = HeightCalibrationMenu.transform.position - new Vector3 (number*MenuEverythingDifference.x,MenuEverythingDifference.y,number*MenuEverythingDifference.z);
+            // reset position x of the TerminationMenu
+            Vector3 TerminationMenuNewPos = TerminationMenu.transform.position;
+            TerminationMenuNewPos.x = Slate.transform.position.x + Slate.GetComponent<DimensionScript>().getGlobalLength()/2 + TerminationSlateEndDifference.x;
+            TerminationMenu.transform.position = TerminationMenuNewPos;
         }
     }
 

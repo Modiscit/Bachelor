@@ -66,6 +66,7 @@ Having the capacity to save to a JSON file
 - v3.5 : fixed interaction can't be started until height is validated. Note : last test on hololens v2.8 (had issues but worked), now doesn't load correctly since at least v3.4.
 - v3.6 : fixed Hololens and README. Note: outline render queue is wrong, file doesn't seem to be saved on the hololens.
 - v3.7 : rotationmode works now, eyetracker is disabled, fieldofview empirical value has been found. Note: saved files on the hololens are accessible via the windows device portal in LocalAppData/Bachelor/LocalState. Fixed Readme file.
+- v3.8 : changed position of the TerminationMenu, attempted and failed to block objects to pass through, left the code commented.
 
 ## extras
 If time allows these things will be added :

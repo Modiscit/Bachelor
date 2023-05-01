@@ -16,6 +16,10 @@ public class ObjectScript : MonoBehaviour
     public float first_time = 0f;
     public float last_time = 0f;
 
+/*     public bool SlateCollision = false;
+    public Vector3 SlateContact;
+    public Vector3 PositionOfContact; */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +31,23 @@ public class ObjectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // This was an attempt at implementing the obstruction of the Slate for the objects so that they don't pass through
+/*         if(SlateCollision){
+            string dim = collisionDimension(SlateContact, GameObject.Find("Slate"));
+            Vector3 pos = this.transform.position;
+            switch (dim){
+                case "X":
+                    pos.x = PositionOfContact.x;
+                    break;
+                case "Y":
+                    pos.y = PositionOfContact.y;
+                    break;
+                default:
+                    pos.z = PositionOfContact.z;
+                    break;
+            }
+            this.transform.position = pos;
+        }   */      
     }
  
     private void OnCollisionEnter(Collision collision)
@@ -67,7 +87,38 @@ public class ObjectScript : MonoBehaviour
                 number_of_errors++;
             }
         }
+/*         if (collision.transform.tag == "Slate"){
+            PositionOfContact = this.transform.position;
+            SlateCollision = true;
+        } */
     }
+
+/*     private void OnCollisionStay(Collision collisionInfo)
+    {
+        if (collisionInfo.transform.tag == "Slate"){
+            SlateContact = collisionInfo.GetContact(0).point;
+        }
+    }
+
+    private void OnCollisionExit(Collision collisionInfo)
+    {
+        if (collisionInfo.transform.tag == "Slate"){
+            SlateCollision = false;
+        }
+    }
+
+    // I tried with globalDepth and globalDepth, but it worked less well than this
+    public string collisionDimension(Vector3 point, GameObject obj){
+        Bounds b = obj.GetComponent<MeshFilter>().mesh.bounds;
+        Vector3 difference = point - b.center;
+        if (Mathf.Abs(difference.x) >= b.extents.x/2){
+            return "X";
+        } else if (Mathf.Abs(difference.y) >= b.extents.y/2){
+            return "Y";
+        } else {
+            return "Z";
+        }
+    } */
 
     // This becomes the object in use and if an object was being used, it can't be interacted with anymore.
     // It also changes the color of the outline to Grab Material
