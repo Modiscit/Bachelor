@@ -2,10 +2,10 @@
   "user_name": "test3",
   "anonimity": false,
   "objects": [
-    {"name": "Square", "number": 6},
-    {"name": "Circle", "number": 6},
+    {"name": "Square", "number": 1},
+    {"name": "Circle", "number": 3},
     {"name": "House", "number": 0},
-    {"name": "Apple", "number": 0}
+    {"name": "Apple", "number": 2}
   ],
   "scale": 0.5,
   "scalemode": "imprintsonly",
@@ -21,7 +21,7 @@
   "colormode": "whiteonblack",
   "PRL": true,
   "PRL_color": "Red",
-  "PRL_size": 0.1,
+  "PRL_size": 0.3,
   "PRL_angle": 270,
   "PRL_distance": 0.05
 }

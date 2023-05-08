@@ -20,6 +20,14 @@ public class DimensionScript : MonoBehaviour
         }
     }
 
+    public float getHeight(){
+        if (this.tag == "Parameters" || this.tag == "Collection"){
+            return 0f;
+        } else {
+            return this.GetComponent<MeshFilter>().mesh.bounds.extents.y * this.transform.localScale.y * 2;
+        }
+    }
+
     public float getChildGlobalLength(Transform thing){
         float firstScaleX = this.transform.localScale.x;
         foreach (Transform child in transform){
@@ -64,11 +72,37 @@ public class DimensionScript : MonoBehaviour
         return firstScaleX * this.getDepth();
     }
 
+    public float getChildGlobalHeight(Transform thing){
+        float firstScaleY = this.transform.localScale.y;
+        foreach (Transform child in transform){
+            if (thing == child){
+                return firstScaleY * child.GetComponent<DimensionScript>().getHeight();
+            } else { 
+                foreach (Transform grandchild in child){
+                    if (thing == grandchild){
+                        return firstScaleY * child.localScale.y * grandchild.GetComponent<DimensionScript>().getHeight();
+                    } else {
+                        foreach (Transform greatgrandchild in grandchild){
+                            if (thing == greatgrandchild){
+                                return firstScaleY * child.localScale.y * grandchild.localScale.y * greatgrandchild.GetComponent<DimensionScript>().getHeight();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return firstScaleY * this.getHeight();
+    }
+
     public float getGlobalLength(){
         return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalLength(this.transform);
     }
 
     public float getGlobalDepth(){
         return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalDepth(this.transform);
+    }
+
+    public float getGlobalHeight(){
+        return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalHeight(this.transform);
     }
 }

@@ -332,8 +332,13 @@ public class ParametersScript : MonoBehaviour
         GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
         Recordfile.objects = new ObjectRecords[ObjectsCollection.transform.childCount];
         int tempIndex = 0;
+        // int numOfPerfects = 0;
+        // float totalDifPercentage = 0f;
         foreach (Transform objectChild in ObjectsCollection.transform){
-            Recordfile.objects[tempIndex++] = objectChild.GetComponent<ObjectScript>().GetRecords();
+            ObjectRecords tempObjRec = objectChild.GetComponent<ObjectScript>().GetRecords();
+            Recordfile.objects[tempIndex++] = tempObjRec;
+            // numOfPerfects += tempObjRec.number_of_errors > 0 ? 0 : 1;
+            // totalDifPercentage += getPercentageOfError(objectChild, tempObjRec);
         }
         Recordfile.scale = scale;
         Recordfile.scalemode = scalemode;
@@ -350,9 +355,17 @@ public class ParametersScript : MonoBehaviour
         string jsonString = JsonUtility.ToJson(Recordfile);
         // find a path to store the file, name the file depending on anonimity
         string saveFile = Application.persistentDataPath + "/" + getName() + ".json";
-        print("path where the JSON is : " + Application.persistentDataPath);
+        // print("path where the JSON is : " + Application.persistentDataPath);
         // Write JSON to file.
         File.WriteAllText(saveFile, jsonString);
+
+        // this was an attempt at a future score window, it was abandoned, as it was something discussed with supervisors, but not Laury
+        // the project is in codesign with the FSA, thus I could not add in new features without prior discussions
+        // feedback to users would be done approprietly by the low vision specialist
+
+        // print("time taken : " + Recordfile.time_total + "s");
+        // print("number of pieces placed without errors" + numOfPerfects +"/" + Recordfile.objects.Length);
+        // print("precision : " + totalDifPercentage*100/Recordfile.objects.Length + "%");
     }
 
     // should return 23_04_11_15_26_name or hash
@@ -374,4 +387,42 @@ public class ParametersScript : MonoBehaviour
         }
         return colorsName;
     }
+
+    // in the future should change to the area covered over the total area
+    // height could also be changed as the piece center will be higher than the imprint center
+/*     public float getPercentageOfError(Transform piece, ObjectRecords pieceRec){
+        // calculate if the difference in x position is between 0 and the length of the piece
+        // calculate the percent of that difference to the length and multiply the overall error percentage
+        float tempPercent = 1;
+        float tempLength = piece.GetComponent<DimensionScript>().getGlobalLength();
+        float normalizedDifference = Math.Abs(pieceRec.direction_of_error.x) - tempLength;
+        normalizedDifference = normalizedDifference < 0 ? 0 : normalizedDifference;
+        tempPercent *= normalizedDifference / tempLength;
+
+        // same for depth
+        float tempDepth = piece.GetComponent<DimensionScript>().getGlobalDepth();
+        normalizedDifference = Math.Abs(pieceRec.direction_of_error.z) - tempDepth;
+        normalizedDifference = normalizedDifference < 0 ? 0 : normalizedDifference;
+        tempPercent *= normalizedDifference / tempDepth;
+
+        // same for height
+        float tempHeight = piece.GetComponent<DimensionScript>().getGlobalHeight();
+        normalizedDifference = Math.Abs(pieceRec.direction_of_error.y) - tempHeight;
+        normalizedDifference = normalizedDifference < 0 ? 0 : normalizedDifference;
+        tempPercent *= normalizedDifference / tempHeight;
+
+        // calculate the difference in rotation
+        // not a perfect solution as a square rotated 90 degrees shouldn't decrease precision
+        float tempRotation = pieceRec.rotation_error.x_angle;
+        normalizedDifference = tempRotation == 0f ? 1f : tempRotation;
+        tempPercent *= normalizedDifference/360;
+        tempRotation = pieceRec.rotation_error.y_angle;
+        normalizedDifference = tempRotation == 0f ? 1f : tempRotation;
+        tempPercent *= normalizedDifference/360;
+        tempRotation = pieceRec.rotation_error.z_angle;
+        normalizedDifference = tempRotation == 0f ? 1f : tempRotation;
+        tempPercent *= normalizedDifference/360;
+
+        return tempPercent;
+    } */
 }

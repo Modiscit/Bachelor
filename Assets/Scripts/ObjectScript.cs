@@ -16,9 +16,8 @@ public class ObjectScript : MonoBehaviour
     public float first_time = 0f;
     public float last_time = 0f;
 
-/*     public bool SlateCollision = false;
-    public Vector3 SlateContact;
-    public Vector3 PositionOfContact; */
+/*     public Vector3 PositionOfContact;
+    public string collisionDim; */
 
     // Start is called before the first frame update
     void Start()
@@ -31,23 +30,7 @@ public class ObjectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // This was an attempt at implementing the obstruction of the Slate for the objects so that they don't pass through
-/*         if(SlateCollision){
-            string dim = collisionDimension(SlateContact, GameObject.Find("Slate"));
-            Vector3 pos = this.transform.position;
-            switch (dim){
-                case "X":
-                    pos.x = PositionOfContact.x;
-                    break;
-                case "Y":
-                    pos.y = PositionOfContact.y;
-                    break;
-                default:
-                    pos.z = PositionOfContact.z;
-                    break;
-            }
-            this.transform.position = pos;
-        }   */      
+        // This was an attempt at implementing the obstruction of the Slate for the objects so that they don't pass through   
     }
  
     private void OnCollisionEnter(Collision collision)
@@ -73,13 +56,6 @@ public class ObjectScript : MonoBehaviour
             // if it is with a correct imprint
             if (isOfColor && isOfShape){
                 last_collision_correct = true;
-                // stops movement, shouldn't need to
-                // this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                // this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                // checks if all objects have been placed
-                // GameObject.Find("Parameters").GetComponent<ParametersScript>().CheckEnd();
-                // to delete at the end
-                // print("Correct Imprint");
             // hits something else
             } else
             {
@@ -89,24 +65,34 @@ public class ObjectScript : MonoBehaviour
         }
 /*         if (collision.transform.tag == "Slate"){
             PositionOfContact = this.transform.position;
-            SlateCollision = true;
-        } */
+            collisionDim = collisionDimension(collision.GetContact(0).point, GameObject.Find("Slate"));
+        }  */
     }
+
+// this was made so the pieces would not go through the slate
+// the code is functional BUT it depends on collision detection
+// collision detection is detected too early in the y position, thus the object cannot be put close to the imprint
+// if collision detection is fixed, this code can be used
 
 /*     private void OnCollisionStay(Collision collisionInfo)
     {
         if (collisionInfo.transform.tag == "Slate"){
-            SlateContact = collisionInfo.GetContact(0).point;
+            Vector3 pos = this.transform.position;
+            switch (collisionDim){
+                case "X":
+                    pos.x = PositionOfContact.x;
+                    break;
+                case "Y":
+                    pos.y = PositionOfContact.y;
+                    break;
+                default:
+                    pos.z = PositionOfContact.z;
+                    break;
+            }
+            this.transform.position = pos;
         }
     }
-
-    private void OnCollisionExit(Collision collisionInfo)
-    {
-        if (collisionInfo.transform.tag == "Slate"){
-            SlateCollision = false;
-        }
-    }
-
+ */
     // I tried with globalDepth and globalDepth, but it worked less well than this
     public string collisionDimension(Vector3 point, GameObject obj){
         Bounds b = obj.GetComponent<MeshFilter>().mesh.bounds;
@@ -118,7 +104,7 @@ public class ObjectScript : MonoBehaviour
         } else {
             return "Z";
         }
-    } */
+    }
 
     // This becomes the object in use and if an object was being used, it can't be interacted with anymore.
     // It also changes the color of the outline to Grab Material

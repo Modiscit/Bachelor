@@ -51,10 +51,11 @@ public class PRLScript : MonoBehaviour
         transform.rotation *= Quaternion.FromToRotation(Vector3.up, Vector3.forward);
     }
 
-    // set the position to be a difference to its parent center position
-    //TODO potentially add the radius to the height, so the bottom of the prl dot touches the border at worst, else the middle of the dot could be visible
+    // set the position to be a difference to its parent center position and make it slightly higher so that it doesn't render in the same space
+    // (there is an argument to make it a radius higher, as if we look at the piece, the dot turns to us, 
+    // at most it will turn with half of the dot below that point, thus hiding half the point in that configuration)
     private void setPosition(Vector3 difference){
         Bounds parentBounds= this.transform.parent.GetComponent<Renderer>().bounds;
-        this.transform.position = parentBounds.center + new Vector3 (0,parentBounds.extents.y,0) + this.differencePosition;
+        this.transform.position = parentBounds.center + new Vector3 (0,parentBounds.extents.y + 0.000001f) + this.differencePosition;
     }
 }

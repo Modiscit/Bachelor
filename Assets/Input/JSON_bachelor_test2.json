@@ -2,14 +2,14 @@
   "user_name": "test2",
   "anonimity": true,
   "objects": [
-    {"name": "Square", "number": 2},
-    {"name": "Circle", "number": 2},
-    {"name": "House", "number": 2},
-    {"name": "Apple", "number": 2}
+    {"name": "Square", "number": 3},
+    {"name": "Circle", "number": 3},
+    {"name": "House", "number": 0},
+    {"name": "Apple", "number": 0}
   ],
   "scale": 1,
   "scalemode": "normal",
-  "limit_to_field_of_view": false,
+  "limit_to_field_of_view": true,
   "rotationmode": "xzlocked",
   "colors": [
     "Blue",
@@ -19,9 +19,9 @@
     "Yellow"
   ],
   "colormode": "blackonwhite",
-  "PRL": false,
+  "PRL": true,
   "PRL_color": "Blue",
-  "PRL_size": 0.05,
+  "PRL_size": 0.2,
   "PRL_angle": 35,
-  "PRL_distance": 0.1
+  "PRL_distance": 0.01
 }
