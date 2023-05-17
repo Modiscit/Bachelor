@@ -7,32 +7,31 @@ using UnityEngine;
 
 public class ObjectScript : MonoBehaviour
 {
+    // this boolean represents whether the object can be interacted with or not
     public bool can_interact = false;
+    // this is the number of errors made regardless of type
     public int number_of_errors = 0;
+    // this is the number of errors when the color is different
     public int number_of_color_errors = 0;
+    // this is the number of errors when the shape is different
     public int number_of_shape_errors = 0;
+    // this is to know whether the last imprint that was collided with is the correct one
+    // it is used to now whether to save the direction of errors or not
     public bool last_collision_correct = false;
+    // this saves the last imprint that was collided with
     public GameObject last_collision_imprint = null;
+    // this is to save when the object was first grabbed
     public float first_time = 0f;
+    // this is to save when the object was last released
     public float last_time = 0f;
 
+// This is used in the attempt to make the slate solid
 /*     public Vector3 PositionOfContact;
     public string collisionDim; */
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // // should be false when I can interact with button in Unity, false for Hololens
-        // can_interact = true;
-        // Interactable();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // This was an attempt at implementing the obstruction of the Slate for the objects so that they don't pass through   
-    }
  
+    // This method needs a rigidbody to function and boxcolliders
+    // It is called when a the associated object's rigidbody collides with another object
+    // It is called with the information on the collision
     private void OnCollisionEnter(Collision collision)
     {
         bool isOfColor = false;
@@ -63,6 +62,7 @@ public class ObjectScript : MonoBehaviour
                 number_of_errors++;
             }
         }
+            // This is used in the attempt to make the slate solid
 /*         if (collision.transform.tag == "Slate"){
             PositionOfContact = this.transform.position;
             collisionDim = collisionDimension(collision.GetContact(0).point, GameObject.Find("Slate"));
@@ -93,7 +93,7 @@ public class ObjectScript : MonoBehaviour
         }
     }
  */
-    // I tried with globalDepth and globalDepth, but it worked less well than this
+/*     // I tried with globalDepth and globalDepth, but it worked less well than this
     public string collisionDimension(Vector3 point, GameObject obj){
         Bounds b = obj.GetComponent<MeshFilter>().mesh.bounds;
         Vector3 difference = point - b.center;
@@ -104,7 +104,7 @@ public class ObjectScript : MonoBehaviour
         } else {
             return "Z";
         }
-    }
+    } */
 
     // This becomes the object in use and if an object was being used, it can't be interacted with anymore.
     // It also changes the color of the outline to Grab Material
@@ -126,7 +126,7 @@ public class ObjectScript : MonoBehaviour
         setOutlineColor("Release");
     }
 
-    // Activates the outline the object to hint that it can be grabbed
+    // Activates the outline of the object to hint that it can be grabbed
     // The outline script shouldn't be activated right from the start, else there is an issue
     public void OnHoverEnter(){
         setOutlineColor("HoverEnter");
@@ -137,17 +137,19 @@ public class ObjectScript : MonoBehaviour
         setOutlineColor("HoverExit");
     }
 
-// Interactable establishes interaction with the object based on the bool placed
+    // Interactable establishes interaction with the object based on the bool can_interact
     public void Interactable(){
         this.GetComponent<NearInteractionGrabbable>().enabled = can_interact;
         this.GetComponent<ObjectManipulator>().enabled = can_interact;
     }
 
+    // Deactivate the object
     public void Terminate(){
         can_interact = false;
         Interactable();
     }
 
+    // This create an ObjectRecords with information about the object and returns it
     public ObjectRecords GetRecords(){
         ObjectRecords record = new ObjectRecords();
         record.type = this.GetComponent<MeshFilter>().mesh.name;
@@ -181,6 +183,7 @@ public class ObjectScript : MonoBehaviour
         return record;
     }
 
+    // This returns the difference of Vector3 rotation between the imprint and the piece, if it was correct
     public RotationRecords GetRotationError(){
         RotationRecords record = new RotationRecords();
         // if no collision was detected or the last collision was not the correct imprint set to 0,0,0
@@ -199,12 +202,14 @@ public class ObjectScript : MonoBehaviour
         return record;
     }
 
+    // the field first_time is instantiated, this is called when it is grabbed for the first time
     public void setFirstGrabbedTime(){
         if (first_time == 0){
             first_time = Time.time;
         }
     }
 
+    // the field last_time is set to the current time, this is called everytime the object is released
     public void setLastReleasedTime(){
         last_time = Time.time;
     }

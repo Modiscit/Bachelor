@@ -7,17 +7,6 @@ public class ObjectsCollectionScript : MonoBehaviour
     // the object currently in interaction with
     public GameObject isInteractingWith = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Lay objects next to a plane in a grid, bottom to top, right to left, 4 by 3.
     public void Lay(Transform planeTransform){
         // Grid parameters, max Per Row is the number of times you can lay the biggest object on the plane completely
@@ -38,7 +27,6 @@ public class ObjectsCollectionScript : MonoBehaviour
         float spaceZ = (planeDepth - (maxPerColumn-1)*biggestDepth)/(maxPerColumn-1);
         // Shuffle the Children objects
         int numOfChildren = this.transform.childCount;
-        print("there is " + numOfChildren + " children for the objectsCollection");
         ShuffleChildren(numOfChildren);
         // Calculate the centers
         List<float> listCenterX = new List<float>();
@@ -52,7 +40,6 @@ public class ObjectsCollectionScript : MonoBehaviour
         int tempRow = 0;
         int tempColumn = 0;
         foreach (Transform child in transform){
-            print(child.name);
             Vector3 newPosition = child.position;
             // the center is not necessarily the origin in Unity
             float biasX = child.position.x - child.GetComponent<Renderer>().bounds.center.x;
@@ -82,10 +69,12 @@ public class ObjectsCollectionScript : MonoBehaviour
         return biggest;
     }
 
+    // Get the Global surface of the X and Z bounds of the transform
     float getBoundingBox(Transform objectTransform){
         return objectTransform.GetComponent<DimensionScript>().getGlobalLength() * objectTransform.GetComponent<DimensionScript>().getGlobalDepth();
     }
 
+    // Shuffle the hierarchy of a number of pieces
     void ShuffleChildren(int numOfChildren){
         List<Transform> childList = new List<Transform>();
         List<int> childIndexList = new List<int>();

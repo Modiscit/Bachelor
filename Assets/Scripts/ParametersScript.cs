@@ -26,10 +26,15 @@ public class ParametersScript : MonoBehaviour
     public float PRL_distance;
     public float PRL_radius;
     public Material PRL_color;
-    // the fields to record
+
+    // the fields to record the start and end time of the task
     public float start = 0f;
     public float end = 0f;
+
     // Start is called before the first frame update
+    // read the associated JSON file
+    // set the fields
+    // apply the parameters
     void Start()
     {
         Parameters parametersInJson = readJson(jsonFile);
@@ -37,17 +42,14 @@ public class ParametersScript : MonoBehaviour
         ApplyUnityParameters();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Creates a Parameters object from the associated JSON file
     private Parameters readJson(TextAsset json){
         Parameters parametersInJson = JsonUtility.FromJson<Parameters>(json.text);
         return parametersInJson;
     }
 
+    // Set the fields to the Parameters object
+    // This is a conversion of basic types to unity types
     private void ParametersToUnityParameters(Parameters parametersObject){
         setName(parametersObject.user_name);
         setAnonimity(parametersObject.anonimity);
@@ -92,7 +94,7 @@ public class ParametersScript : MonoBehaviour
     public void setScale(float number=1f, bool limit=true){
         float minScale = 0.1f;
         float maxScale = 1f;
-        // TOCHECK empircally, find the value that max the field of view
+        // empirical value that maximize the field of view
         float maxFieldOfView = 0.3f;
         if (limit){
             this.scale = Mathf.Min(maxFieldOfView,number);
@@ -163,6 +165,7 @@ public class ParametersScript : MonoBehaviour
     }
 
     // All apply
+    // The order matter as it modifies the prefabs, then copy them, then randomize colors, then Lays them
     public void ApplyUnityParameters(){
         applyScale(this.scale, this.scalemode);
         applyRotationMode(this.rotationmode);
@@ -176,6 +179,8 @@ public class ParametersScript : MonoBehaviour
     // default is no change in scale and everything scale normally
     private void applyScale(float number=1f, string mode="normal"){
         GameObject Slate = GameObject.Find("Slate");
+        // if it is imprintsonly, only the imprints will be scaled
+        // doesn't take into account field_of_view
         if (mode.Equals("imprintsonly")){
             GameObject ImprintsCollections = GameObject.Find("ImprintsCollection");
             foreach (Transform imprintChild in ImprintsCollections.transform){
@@ -222,14 +227,10 @@ public class ParametersScript : MonoBehaviour
         // enable rotation only on the Y axis
         if (mode.Equals("xzlocked")){
             foreach (Transform childObject in this.objectsList){
-                //var objectManip = childObject.gameObject.GetComponent<ObjectManipulator>();
                 RotationAxisConstraint XAxisRotationContraint = childObject.gameObject.AddComponent<RotationAxisConstraint>();
                 RotationAxisConstraint ZAxisRotationContraint = childObject.gameObject.AddComponent<RotationAxisConstraint>();
                 XAxisRotationContraint.ConstraintOnRotation = AxisFlags.XAxis;
                 ZAxisRotationContraint.ConstraintOnRotation = AxisFlags.ZAxis;
-                //RotationAxisConstraint xzRotationConstraint = new RotationAxisConstraint();
-                //xzRotationConstraint.ConstraintOnRotation = AxisFlags.YAxis;
-                //objectManip.ConstraintsManager.AddConstraintToManualSelection(xzRotationConstraint);
             }
         // disable all rotations
         } else if (mode.Equals("locked")){
@@ -239,8 +240,8 @@ public class ParametersScript : MonoBehaviour
         }
     }
 
-    // for this method to work, the imprints need to have the same name as the objects + Imprint.
-    // can be called only once if there was a 0 in the list.
+    // for this method to work, the imprints need to have the same name as the objects + "Imprint".
+    // can be called only once if there was a 0 in the list as the object won't be able to be created without an original.
     private void applyObjects(List<Transform> piecesList, List<int> piecesNumbersList){
         GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
         GameObject ImprintsCollection = GameObject.Find("ImprintsCollection");
@@ -250,6 +251,7 @@ public class ParametersScript : MonoBehaviour
             GameObject pieceImprint = GameObject.Find(piece.name + "Imprint");
             if (number < 1){
                 // necessary else the parent still counts as having that child, even though it is dead
+                // it will cause issues with traversing children otherwise
                 piece.transform.parent = null;
                 pieceImprint.transform.parent = null;
                 Destroy(piece);
@@ -265,11 +267,11 @@ public class ParametersScript : MonoBehaviour
                 }
             }
         }
-        print("the objecCollection has " + ObjectsCollection.transform.childCount + " children from the parameters");
     }
 
+    // apply colors to the slate, objects and imprints based on the Material list and the coloring chosen
     // can't be called twice as the imprints and the objects pairs don't have the same indices after intialization
-    // in case this methods is called multiple times, uncomment the changing of the slate color
+    // in case this method is called multiple times, uncomment the changing of the slate color
     private void applyColors(List<Material> materials, string coloring){
         GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
         GameObject ImprintsCollection = GameObject.Find("ImprintsCollection");
@@ -310,12 +312,14 @@ public class ParametersScript : MonoBehaviour
         }
     }
 
+    // Apply the randomized placement of imprints and pieces
     private void applyLays(){
         Transform slate = GameObject.FindGameObjectWithTag("Slate").transform;
         GameObject.Find("ObjectsCollection").GetComponent<ObjectsCollectionScript>().Lay(slate);
         GameObject.Find("ImprintsCollection").GetComponent<ImprintsCollectionScript>().Lay(slate);
     }
 
+    // Stops all pieces from being interactable and record data
     public void Terminate(){
         GameObject ObjectsCollection = GameObject.Find("ObjectsCollection");
         foreach (Transform ObjectChild in ObjectsCollection.transform){
@@ -324,6 +328,7 @@ public class ParametersScript : MonoBehaviour
         Record();
     }
 
+    // Create a Records and transform it into a JSON file to be saved
     public void Record(){
         Records Recordfile = new Records();
         // Get time between validation of height and validation of task
@@ -359,7 +364,7 @@ public class ParametersScript : MonoBehaviour
         // Write JSON to file.
         File.WriteAllText(saveFile, jsonString);
 
-        // this was an attempt at a future score window, it was abandoned, as it was something discussed with supervisors, but not Laury
+        // this was an attempt at a future score window, it was abandoned, as it was something discussed with supervisors, but not Laurie
         // the project is in codesign with the FSA, thus I could not add in new features without prior discussions
         // feedback to users would be done approprietly by the low vision specialist
 
@@ -368,7 +373,7 @@ public class ParametersScript : MonoBehaviour
         // print("precision : " + totalDifPercentage*100/Recordfile.objects.Length + "%");
     }
 
-    // should return 23_04_11_15_26_name or hash
+    // should return a string like 23_04_11_15_26_name or hash based on anonimity
     public string getName(){
         string date = DateTime.Now.ToString("yyyy_MM_dd_HH_mm_");
         string nameOfFile = date + user_name;

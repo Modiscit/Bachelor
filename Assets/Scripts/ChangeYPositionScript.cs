@@ -25,7 +25,5 @@ public class ChangeYPositionScript : MonoBehaviour
                 }
             }
         }
-        // to delete
-        print("Interactable once more");
     }
 }

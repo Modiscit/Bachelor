@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class PRLScript : MonoBehaviour
 {
+    // needs to know where the eyes of the user are
     public Transform cameraTransform;
+    // difference in the space between the PRL origin and the piece origin
     public Vector3 differencePosition = Vector3.zero;
 
 
     // Update is called once per frame
+    // Update the orientation and the position of the PRL dot to compensate for movement of the piece and the user
     void Update()
     {
         setOrientation(cameraTransform);
         setPosition(differencePosition);
     }
 
+    // set the difference in position with the piece based on the radius, the angle and the distance given
+    // set the color of the PRL dot
     public void setRadiusAndPositionFieldAndColor(int angle, float distance, float radius, Material color){
         setRadius(radius);
         setPositionField(angle, distance);
         setColor(color);
     }
 
+    // set the size of the PRL dot regardless of the scale
     private void setRadius(float radius){
         float scalemultiplier = radius*2/this.GetComponent<DimensionScript>().getChildGlobalDepth(this.transform);
         Vector3 newScale = this.transform.localScale;

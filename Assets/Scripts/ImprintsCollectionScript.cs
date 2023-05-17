@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ImprintsCollectionScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Lay objects on a plane in a grid, left to right, top to bottom, 4 by 3.
     public void Lay(Transform planeTransform){
@@ -75,10 +70,12 @@ public class ImprintsCollectionScript : MonoBehaviour
         return biggest;
     }
 
+    // Get the Global surface of the X and Z bounds of the transform
     float getBoundingBox(Transform objectTransform){
         return objectTransform.GetComponent<DimensionScript>().getGlobalLength() * objectTransform.GetComponent<DimensionScript>().getGlobalDepth();
     }
 
+    // Shuffle the hierarchy of a number of imprints
     void ShuffleChildren(int numOfChildren){
         List<Transform> childList = new List<Transform>();
         List<int> childIndexList = new List<int>();

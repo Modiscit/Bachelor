@@ -13,6 +13,8 @@ This branch is the main branch and holds the latest code that has been tested on
 - v3.6 : same as prototype 3
 - v3.7 : same as prototype 3
 - v3.9 : same as prototype 3
+- v3.9b : same as prototype 3
+- v3.10 : final version, added comments and deleted useless methods and prints
 
 ## prototype 1
 This branch is up to the first prototype, the base prototype, it consists of the following points.
@@ -69,6 +71,8 @@ Having the capacity to save to a JSON file
 - v3.7 : rotationmode works now, eyetracker is disabled, fieldofview empirical value has been found. Note: saved files on the hololens are accessible via the windows device portal in LocalAppData/Bachelor/LocalState. Fixed Readme file.
 - v3.8 : changed position of the TerminationMenu, attempted and failed to block objects to pass through, left the code commented.
 - v3.9 : changed position of everything to be lower and futher. PRL is slightly higher. Note : added code for score and slate blocking but commented.
+- v3.9b : identical
+- v3.10 : same as hololens
 
 ## extras
 If time allows these things will be added :
@@ -78,12 +82,14 @@ Safeguards when things are not present in Unity from the JSON file
 Collisions are inaccurate (check multiple primitive colliders). Especially Y which is too high. Which is why slate blocking is commented.
 Collisions for small objects are harder to detect in hololens.
 Outlines render behind other objects, a fix has come out as it is still being developped, see if I can update it without having to redo everything.
+On latest build, for some reason, the PRL dot doesn't follow the camera anymore.
 
 ## known limits
 Objects can be collided with others which may change their rotation. That is due to the RigidBody component which is necessary for OnCollision methods.
 PRL should be higher by its radius from the top of the bounding box of the piece. I did not have the time to make it work.
 FieldOfView only works when the scalemode is normal. ImprintsOnly is not widely used as such it is in full scale all the time.
 Score was implemented but commented as this was a feature discussed 3 days before the final version without discussion with the FSA.
+Outlines should have a space in between the object and render properly. I copied the project and tested this package https://github.com/Cameron-Micka/MixedReality-GraphicsTools-Unity/tree/user/cameron-micka/stencil-outlines, but it didn't have the stencil outline option like in here https://github.com/microsoft/MixedReality-GraphicsTools-Unity/pull/119
 
 ## known fixes
 Had an issue where the app would work for a user, but not me on the hololens. Karim fixed it by repairing the application on the hololens.

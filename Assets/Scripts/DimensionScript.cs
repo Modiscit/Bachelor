@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DimensionScript : MonoBehaviour
 {
+    // Get local length of the mesh, based on its bounds
     public float getLength(){
         if (this.tag == "Parameters" || this.tag == "Collection"){
             return 0f;
@@ -12,6 +13,7 @@ public class DimensionScript : MonoBehaviour
         }
     }
 
+    // Get local depth of the mesh, based on its bounds
     public float getDepth(){
         if (this.tag == "Parameters" || this.tag == "Collection"){
             return 0f;
@@ -20,6 +22,7 @@ public class DimensionScript : MonoBehaviour
         }
     }
 
+    // Get local height of the mesh, based on its bounds
     public float getHeight(){
         if (this.tag == "Parameters" || this.tag == "Collection"){
             return 0f;
@@ -28,6 +31,7 @@ public class DimensionScript : MonoBehaviour
         }
     }
 
+    // Get global length of the mesh belonging to the child Transform, based on its bounds
     public float getChildGlobalLength(Transform thing){
         float firstScaleX = this.transform.localScale.x;
         foreach (Transform child in transform){
@@ -50,6 +54,7 @@ public class DimensionScript : MonoBehaviour
         return firstScaleX * this.getLength();
     }
 
+    // Get global depth of the mesh belonging to the child Transform, based on its bounds
     public float getChildGlobalDepth(Transform thing){
         float firstScaleX = this.transform.localScale.x;
         foreach (Transform child in transform){
@@ -72,6 +77,7 @@ public class DimensionScript : MonoBehaviour
         return firstScaleX * this.getDepth();
     }
 
+    // Get global height of the mesh belonging to the child Transform, based on its bounds
     public float getChildGlobalHeight(Transform thing){
         float firstScaleY = this.transform.localScale.y;
         foreach (Transform child in transform){
@@ -94,14 +100,17 @@ public class DimensionScript : MonoBehaviour
         return firstScaleY * this.getHeight();
     }
 
+    // Get global length of the mesh by calling the root of the hierarchy of objects, parameters, on itself
     public float getGlobalLength(){
         return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalLength(this.transform);
     }
 
+    // Get global depth of the mesh by calling the root of the hierarchy of objects, parameters, on itself
     public float getGlobalDepth(){
         return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalDepth(this.transform);
     }
 
+    // Get global height of the mesh by calling the root of the hierarchy of objects, parameters, on itself
     public float getGlobalHeight(){
         return GameObject.Find("Parameters").GetComponent<DimensionScript>().getChildGlobalHeight(this.transform);
     }

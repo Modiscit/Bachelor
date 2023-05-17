@@ -15,6 +15,8 @@ public class TerminationMenuScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    // Save the time for the end of the task
+    // Call the terminate function of ParametersScript, rendering all pieces uninteractable and saving data
     public void Terminate(){
         GameObject Parameters = GameObject.Find("Parameters");
         Parameters.GetComponent<ParametersScript>().end = Time.time;
